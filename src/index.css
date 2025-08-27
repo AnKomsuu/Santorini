@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-blue: #4567aa;
+  --color-theme-blue: #4567aa;
+  --color-light-black: #202020;
+  --color-theme-50: #f9fafb;
+  --color-theme-100: #f3f4f6;
+  --color-theme-img: white;
+  --color-theme-login: white;
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1400px] mx-auto px-4;
+  }
+}
+html.dark {
+  --color-theme-50: #242527;
+  --color-theme-login: #e0e0e0;
+  --color-theme-img: #1b1a19;
+  --color-theme-100: #49494b;
+  --color-theme-blue: #ffffff;
+}
+body {
+  background-color: white;
+  color: #1f2a37;
+  transition: background-color 0.3s, color 0.3s;
+}
+#main-header {
+  background-color: white;
+  transition: background-color 0.3s;
+}
+#main-header .theme-icon {
+  color: #4666a9;
+}
+#main-header .theme-logo {
+  filter: none;
+}
+#main-header .theme-mode {
+  filter: none;
+}
+#side-menu {
+  background-color: white;
+  color: #1f2a37;
+}
+#booking {
+  background-color: white;
+  color: #1f2a37;
+}
+
+html.dark body {
+  background-color: #1b1a19;
+  color: #d1d5db;
+}
+html.dark #main-header {
+  background-color: #272523;
+}
+html.dark #main-header .theme-icon {
+  color: white;
+}
+html.dark #main-header .theme-logo {
+  filter: invert(1);
+}
+html.dark #main-header .theme-mode {
+  filter: invert(0.82);
+}
+html.dark #side-menu {
+  background-color: #1b1a19;
+  color: #d1d5db;
+  border-color: rgb(74, 69, 69);
+}
+html.dark #booking {
+  background-color: #1b1a19;
+  color: #d1d5db;
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1400px] mx-auto px-4;
+  }
+}
+input[type="password"]::-ms-reveal {
+  display: none;
+}
