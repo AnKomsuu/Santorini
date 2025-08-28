@@ -266,7 +266,6 @@ const SectionBookingForm = ({
                   className="w-full outline-none"
                   value={roomType}
                   onChange={(e) => setRoomType(e.target.value)}
-                  disabled={isAuth}
                 >
                   <option value="standard">Стандарт</option>
                   <option value="deluxe">Делюкс</option>
