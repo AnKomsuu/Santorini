@@ -1,187 +1,146 @@
 import { useState, useRef, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useTheme } from "../../context/ThemeContext";
-import { TbMenu } from "react-icons/tb";
 import { useAuth } from "../../context/AuthContext";
+import { TbMenu } from "react-icons/tb";
 import { FiUser } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import { BsArrowUpRight } from "react-icons/bs";
+import { FaPhoneAlt } from "react-icons/fa";
 import santorini from "../../assets/santorini.svg";
 import mode from "../../assets/mode.svg";
 import vk from "../../assets/vk.svg";
 import youtube from "../../assets/YouTube.svg";
 import zen from "../../assets/zen.svg";
-import { FaPhoneAlt } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
 import SearchPanel from "../SearchPanel/SearchPanel";
 
+const navLinksInfo = [
+  { id: 1, path: "/rooms", title: "Номера и цены" },
+  { id: 2, path: "/about", title: "Об отеле" },
+  { id: 3, path: "/services", title: "Услуги" },
+  { id: 4, path: "/rulesPage", title: "Условия проживания" },
+  { id: 5, path: "/news", title: "Новости" },
+  { id: 6, path: "/contact", title: "контакты" },
+  { id: 7, path: "/photoHotel", title: "Фото отеля" },
+  { id: 8, path: "/road", title: "Как добраться" },
+  { id: 9, path: "/reviews", title: "Отзывы гостей" },
+];
+
+const navLinksPlace = [
+  { id: 1, path: "/attractionsPage", title: "Достопримечательности" },
+  { id: 2, path: "/pastaBarPage", title: "паста-бар" },
+  { id: 3, path: "/recreation", title: "Активный отдых" },
+  { id: 4, path: "/specials", title: "Спецпредложения" },
+];
+
 const Header = ({ isSearchOpen, onSearchClose }) => {
-  const [isOpen, setOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
   const { toggleTheme } = useTheme();
-  const { isAuth, user, logout } = useAuth();
+  const { isAuth } = useAuth();
 
   useEffect(() => {
-    setOpen(false);
+    setMenuOpen(false);
+    document.body.style.overflow = '';
   }, [location]);
 
   useClickOutside(menuRef, () => {
-    if (isOpen) setTimeout(() => setOpen(false), 50);
+    if (isMenuOpen) setMenuOpen(false);
   });
-  const info = [
-    { id: 1, path: "/rooms", title: "Номера и цены" },
-    { id: 2, path: "/about", title: "Об отеле" },
-    { id: 3, path: "/services", title: "Услуги" },
-    { id: 4, path: "/rulesPage", title: "Условия проживания" },
-    { id: 5, path: "/news", title: "Новости" },
-    { id: 6, path: "/contact", title: "контакты" },
-    { id: 7, path: "/photoHotel", title: "Фото отеля" },
-    { id: 8, path: "/road", title: "Как добраться" },
-    { id: 9, path: "/reviews", title: "Отзывы гостей" },
-  ];
-  const place = [
-    { id: 1, path2: "/attractionsPage", title: "Достопримечательности" },
-    { id: 2, path2: "/pastaBarPage", title: "паста-бар" },
-    { id: 3, path2: "/recreation", title: "Активный отдых" },
-    { id: 4, path2: "/specials", title: "Спецпредложения" },
-  ];
+
+  const toggleMenu = () => {
+    const newMenuState = !isMenuOpen;
+    setMenuOpen(newMenuState);
+    document.body.style.overflow = newMenuState ? 'hidden' : '';
+  };
+
+  const NavLink = ({ to, children }) => (
+    <Link to={to} className="hover:text-red-500 transition-colors uppercase">
+      {children}
+    </Link>
+  );
+
   return (
-    <>
-      <header id="main-header" className="sticky top-0 z-50 py-6 shadow-md">
-        <div className="container">
-          <div className="flex items-center justify-between relative">
-            <div className="flex items-center gap-x-10">
-              <button onClick={() => setOpen(!isOpen)}>
-                {isOpen ? (
-                  <IoMdClose className="text-4xl text-bg-blue cursor-pointer" />
-                ) : (
-                  <TbMenu className="text-4xl theme-icon text-bg-blue cursor-pointer" />
-                )}
-              </button>
-              <Link to="/">
-                <img
-                  className="theme-logo"
-                  src={santorini}
-                  alt="Santorini Logo"
-                />
-              </Link>
-
-              {isAuth ? (
-                <>
-                  <Link
-                    to="/profile"
-                    className="flex items-center text-3xl gap-x-2 font-medium hover:text-bg-blue"
-                  >
-                    <FiUser />
-                  </Link>
-                </>
-              ) : (
-                <Link
-                  to="/login"
-                  className="uppercase bg-bg-blue text-white px-6 py-3 rounded-md font-medium flex items-center gap-x-2"
-                >
-                  Войти <BsArrowUpRight />
-                </Link>
-              )}
-            </div>
-            <button
-              onClick={toggleTheme}
-              className="absolute left-1/2 -translate-x-1/2 -bottom-12 p-5 theme-mode cursor-pointer rounded-full shadow-lg bg-white"
-            >
-              <img src={mode} alt="Кнопка" className="w-12 h-12 z-50" />
+    <header className="sticky top-0 z-50 py-4 bg-white shadow-md">
+      <div className="container">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-x-4 md:gap-x-8">
+            <button onClick={toggleMenu} aria-label="Открыть меню" aria-expanded={isMenuOpen} aria-controls="side-menu">
+              {isMenuOpen ? <IoMdClose className="text-3xl" /> : <TbMenu className="text-3xl" />}
             </button>
-
-            <Link
-              to="/booking"
-              className="uppercase bg-bg-blue text-white w-56 py-4 cursor-pointer
-                       flex items-center gap-x-3 justify-center font-medium
-                       hover:bg-blue-800 transition-colors"
-            >
-              забронировать
-              <BsArrowUpRight className="text-xl" />
+            <Link to="/" aria-label="На главную">
+              <img className="w-28 md:w-36" src={santorini} alt="Логотип Santorini" />
             </Link>
           </div>
-          <div
-            id="side-menu"
-            ref={menuRef}
-            className={`absolute w-160 h-159 text-lg top-26 border-r-3 border-bg-blue left-0 bg-white transform transition-transform duration-300 ease-in-out
-             ${isOpen ? "translate-x-0" : "-translate-x-full"}
-            }`}
-          >
-            <div className="flex justify-around items-baseline">
-              <div className="leading-14 flex flex-col uppercase">
-                {info.map((item, idx) => (
-                  <Link
-                    to={item.path}
-                    key={idx}
-                    className={`hover:text-red-500${
-                      idx >= 2 && idx <= 5 ? " hover:text-red-500" : ""
-                    }`}
-                    href=""
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-              </div>
-              <div className="leading-16 flex flex-col uppercase">
-                {place.map((item, index) => (
-                  <Link
-                    to={item.path2}
-                    key={index}
-                    className="hover:text-red-500"
-                    href=""
-                  >
-                    {item.title}
-                  </Link>
-                ))}
-                <Link
-                  to="/booking"
-                  className="uppercase bg-bg-blue text-white w-56 cursor-pointer
-                       flex items-center gap-x-3 justify-center mt-42"
-                >
-                  забронировать
-                  <BsArrowUpRight className="text-xl" />
-                </Link>
-              </div>
-            </div>
-            <div className="mt-5 pt-3 uppercase flex text-theme-blue justify-around border-t-2 border-theme-blue">
-              <div>
-                <p className="flex items-center mb-3 gap-x-2">
-                  <FaPhoneAlt />
-                  8(912) 038-80-44
-                </p>
-                <div className="flex justify-between items-center gap-x-3">
-                  <a
-                    href="https://vk.com/video-226154244_456239053"
-                    target="https://vk.com/video-226154244_456239053"
-                  >
-                    <img className="w-8" src={vk} alt="" />
-                  </a>
-                  <a
-                    href="https://youtu.be/j-iheFkstFQ"
-                    target="https://youtu.be/j-iheFkstFQ"
-                  >
-                    <img className="w-9" src={youtube} alt="" />
-                  </a>
-                  <a
-                    href="https://dzen.ru/video/watch/686676736777d3671a5c2813?sid=544742401204260607"
-                    target="https://dzen.ru/video/watch/686676736777d3671a5c2813?sid=544742401204260607"
-                  >
-                    <img className="w-8" src={zen} alt="" />
-                  </a>
+
+          <div className="flex items-center gap-x-4">
+            {isAuth ? (
+              <Link to="/profile" className="text-2xl hover:text-bg-blue transition-colors" aria-label="Профиль пользователя">
+                <FiUser />
+              </Link>
+            ) : (
+              <Link to="/login" className="hidden md:flex items-center gap-x-2 bg-bg-blue text-white px-6 py-2.5 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase">
+                Войти <BsArrowUpRight />
+              </Link>
+            )}
+            <Link to="/booking" className="flex items-center justify-center gap-x-2 bg-bg-blue text-white px-4 py-2.5 md:px-6 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase text-sm md:text-base">
+              <span className="hidden md:inline">забронировать</span>
+              <span className="md:hidden">Бронь</span>
+              <BsArrowUpRight className="text-lg" />
+            </Link>
+          </div>
+        </div>
+
+        <button onClick={toggleTheme} className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full p-3 theme-mode rounded-full shadow-lg bg-white hover:bg-gray-100 transition-colors" aria-label="Сменить тему">
+          <img src={mode} alt="Смена темы" className="w-10 h-10" />
+        </button>
+
+        <nav
+          id="side-menu"
+          ref={menuRef}
+          className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-300 ease-in-out z-40 md:absolute md:w-[40rem] md:h-auto md:top-full md:rounded-br-lg md:shadow-lg ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
+        >
+          <div className="flex flex-col h-full">
+            <div className="flex-grow p-8 pt-24 md:p-10 overflow-y-auto">
+              <div className="flex flex-col md:flex-row gap-10 md:gap-20 text-center md:text-left text-lg">
+                <div className="flex flex-col gap-y-5 leading-relaxed">
+                  {navLinksInfo.map((item) => <NavLink key={item.id} to={item.path}>{item.title}</NavLink>)}
+                </div>
+                <div className="flex flex-col gap-y-5 leading-relaxed">
+                  {navLinksPlace.map((item) => <NavLink key={item.id} to={item.path}>{item.title}</NavLink>)}
+                  {!isAuth && (
+                    <Link to="/login" className="md:hidden flex items-center justify-center gap-x-2 bg-bg-blue text-white px-6 py-3 mt-4 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase">
+                      Войти <BsArrowUpRight />
+                    </Link>
+                  )}
                 </div>
               </div>
-              <p className="text-sm">
-                298690, Россия, Крым, г. Ялта, пгт <br /> Форос, Форосский
-                спуск, 1
+            </div>
+
+            <div className="flex-shrink-0 p-6 border-t-2 border-theme-blue flex flex-col md:flex-row justify-between items-center gap-6 text-theme-blue">
+              <div className="text-center md:text-left">
+                <a href="tel:89120388044" className="flex items-center justify-center md:justify-start gap-x-2 mb-2 hover:text-opacity-80 transition-opacity">
+                  <FaPhoneAlt />
+                  8(912) 038-80-44
+                </a>
+                <div className="flex items-center justify-center md:justify-start gap-x-4">
+                  <a href="https://vk.com" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={vk} alt="Вконтакте" /></a>
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={youtube} alt="YouTube" /></a>
+                  <a href="https://dzen.ru" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={zen} alt="Дзен" /></a>
+                  <button onClick={toggleTheme} className="lg:hidden" aria-label="Сменить тему"><img src={mode} alt="Смена темы" className="w-7 h-7" /></button>
+                </div>
+              </div>
+              <p className="text-sm text-center md:text-left max-w-xs">
+                298690, Россия, Крым, г. Ялта, пгт Форос, Форосский спуск, 1
               </p>
             </div>
           </div>
-        </div>
-        <SearchPanel isOpen={isSearchOpen} onClose={onSearchClose} />
-      </header>
-    </>
+        </nav>
+      </div>
+      <SearchPanel isOpen={isSearchOpen} onClose={onSearchClose} />
+    </header>
   );
 };
 

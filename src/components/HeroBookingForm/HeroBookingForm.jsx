@@ -37,10 +37,10 @@ const HeroBookingForm = () => {
       <div
         id="booking"
         ref={menuRef}
-        className="max-w-6xl w-full h-24 absolute bottom-25 left-1/2 -translate-x-1/2 rounded-lg 
-                   flex items-stretch shadow-lg"
+        className="max-w-6xl w-full h-auto md:h-24 absolute bottom-0 md:bottom-25 left-1/2 -translate-x-1/2 rounded-lg 
+                   flex flex-col md:flex-row items-stretch shadow-lg bg-white"
       >
-        <div className="relative flex-1 flex items-center gap-x-4 px-6">
+        <div className="relative flex-1 flex items-center gap-x-4 px-6 py-4 md:py-0">
           <MdOutlineDateRange
             onClick={resetRange}
             className="text-3xl cursor-pointer"
@@ -64,7 +64,7 @@ const HeroBookingForm = () => {
           />
 
           {isCalendarOpen && (
-            <div className="absolute top-full mt-2 bg-theme-50 p-2 rounded-lg shadow-2xl left-0">
+            <div className="absolute top-full mt-2 bg-white p-2 rounded-lg shadow-2xl left-1/2 -translate-x-1/2 md:left-0 md:-translate-x-0">
               <DayPicker
                 className="z-40"
                 mode="range"
@@ -77,9 +77,9 @@ const HeroBookingForm = () => {
           )}
         </div>
 
-        <div className="w-0.5 bg-theme-blue"></div>
+        <div className="w-full md:w-0.5 h-0.5 md:h-auto bg-theme-blue"></div>
 
-        <div className="flex-1 flex items-center justify-between px-6">
+        <div className="flex-1 flex items-center justify-between px-6 py-4 md:py-0">
           <div className="flex items-center gap-x-4">
             <GoPeople className="text-3xl text-gray-400" />
             <p className="uppercase font-medium">Кол-во человек</p>
@@ -103,9 +103,9 @@ const HeroBookingForm = () => {
           </div>
         </div>
 
-        <div className="w-0.5 bg-theme-blue"></div>
+        <div className="w-full md:w-0.5 h-0.5 md:h-auto bg-theme-blue"></div>
 
-        <div className="flex items-center justify-center px-6">
+        <div className="flex items-center justify-center px-6 py-4 md:py-0">
           <button
             type="button"
             onClick={onSearchOpen}

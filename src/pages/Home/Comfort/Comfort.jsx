@@ -3,10 +3,10 @@ import HeroBookingForm from "../../../components/HeroBookingForm/HeroBookingForm
 const Comfort = () => {
   return (
     <section
-      className="h-200 bg-no-repeat w-377 mx-auto relative"
+      className="h-[60vh] md:h-[80vh] lg:h-screen bg-no-repeat bg-cover bg-center w-full mx-auto relative"
       style={{ backgroundImage: `url(${fon})` }}
     >
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 w-full">
+      <div className="absolute bottom-0 md:bottom-12 left-1/2 -translate-x-1/2 w-full px-4">
         <HeroBookingForm />
       </div>
     </section>
