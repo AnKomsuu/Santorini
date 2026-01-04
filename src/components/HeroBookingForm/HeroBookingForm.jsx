@@ -37,7 +37,7 @@ const HeroBookingForm = () => {
       <div
         id="booking"
         ref={menuRef}
-        className="max-w-6xl w-full h-auto md:h-24 absolute bottom-0 md:bottom-25 left-1/2 -translate-x-1/2 rounded-lg 
+        className="max-w-6xl w-full h-auto py-4 md:py-0 md:h-24 absolute bottom-0 md:bottom-25 left-1/2 -translate-x-1/2 rounded-lg 
                    flex flex-col md:flex-row items-stretch shadow-lg bg-white"
       >
         <div className="relative flex-1 flex items-center gap-x-4 px-6 py-4 md:py-0">
@@ -77,7 +77,8 @@ const HeroBookingForm = () => {
           )}
         </div>
 
-        <div className="w-full md:w-0.5 h-0.5 md:h-auto bg-theme-blue"></div>
+        <div className="w-full h-px bg-gray-200 md:hidden my-2"></div>
+        <div className="hidden md:block w-0.5 h-auto bg-theme-blue"></div>
 
         <div className="flex-1 flex items-center justify-between px-6 py-4 md:py-0">
           <div className="flex items-center gap-x-4">
@@ -103,7 +104,8 @@ const HeroBookingForm = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-0.5 h-0.5 md:h-auto bg-theme-blue"></div>
+        <div className="w-full h-px bg-gray-200 md:hidden my-2"></div>
+        <div className="hidden md:block w-0.5 h-auto bg-theme-blue"></div>
 
         <div className="flex items-center justify-center px-6 py-4 md:py-0">
           <button

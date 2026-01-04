@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 import { FiUser, FiPhone } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Road = () => {
   const [nameError, setNameError] = useState("");
@@ -47,7 +48,7 @@ const Road = () => {
     event.preventDefault();
 
     if (!isFormValid) {
-      alert("Пожалуйста, заполните все поля корректно.");
+      toast.error("Пожалуйста, заполните все поля корректно.");
       return;
     }
 
@@ -67,7 +68,7 @@ const Road = () => {
       );
 
       if (hasAlreadyRequested) {
-        alert(
+        toast.error(
           "Вы уже отправляли запрос о помощи. Наш менеджер скоро с вами свяжется."
         );
         return;
@@ -89,8 +90,7 @@ const Road = () => {
 
     setName("");
     setPhone("");
-    console.log("Отправка данных:", { name, phone });
-    alert("Спасибо! Мы скоро с вами свяжемся.");
+    toast.success("Спасибо! Мы скоро с вами свяжемся.");
     navigate("/");
   };
   return (
@@ -99,7 +99,7 @@ const Road = () => {
         <div className="relative mb-47">
           <img src={fon} alt="" />
           <p
-            className="absolute bottom-[-60px] left-[24%] text-center text-4xl uppercase
+            className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 text-center text-2xl md:text-3xl lg:text-4xl uppercase
                           pt-9 px-15 bg-theme-img rounded-t-[40px] font-serif leading-snug"
           >
             Постройте свой маршрут <br /> до нашего отеля
@@ -119,7 +119,7 @@ const Road = () => {
         </p>
         <form
           onSubmit={handleSubmit}
-          className="w-200 flex items-start gap-x-4 mx-auto"
+          className="w-full max-w-2xl flex flex-col md:flex-row items-start gap-4 md:gap-x-4 mx-auto px-4"
         >
           <div className="flex-grow">
             <div className="flex items-center">
@@ -147,8 +147,8 @@ const Road = () => {
                 onChange={(e) => {
                   setPhone(e.target.value);
                   setPhoneError("");
-                  disabled = { isAuth };
                 }}
+                disabled={isAuth}
               >
                 {(inputProps) => (
                   <input

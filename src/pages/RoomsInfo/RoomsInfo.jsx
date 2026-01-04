@@ -1,6 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import axios from "axios";
 import AboutRoom from "./AboutRoom/AboutRoom";
 import RoomVideo from "./RoomVideo/RoomVideo";

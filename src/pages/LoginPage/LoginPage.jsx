@@ -30,7 +30,7 @@ const LoginPage = () => {
     <div className="flex items-center justify-center min-h-screen bg-theme-50 ">
       <div className="w-full max-w-md p-8 space-y-8 bg-orange-400 text-white rounded-xl shadow-lg">
         <div className="text-center">
-          <h2 className="text-4xl font-serif italic">Вход в Santorini</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif italic">Вход в Santorini</h2>
           <p className="mt-2">
             Войдите в свой аккаунт, чтобы увидеть историю бронирований.
           </p>

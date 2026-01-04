@@ -1,35 +1,15 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
 import BookingForm from "../../components/SectionBookingForm/SectionBookingForm";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
+import useData from "../../hooks/useData";
+import api from "../../services/api";
 
 const SpecialsPage = () => {
-  const [specials, setSpecials] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: specials, loading, error } = useData(api.getSpecials);
 
-  useEffect(() => {
-    const fetchSpecials = async () => {
-      try {
-        const response = await axios.get("/db.json");
-        if (response.data && response.data.specials) {
-          setSpecials(response.data.specials);
-        } else {
-          setError("Раздел 'specials' не найден в db.json");
-        }
-      } catch (err) {
-        setError("Не удалось загрузить данные.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchSpecials();
-  }, []);
   if (loading) {
     return <div className="container py-40 text-center">Загрузка...</div>;
   }
@@ -52,7 +32,7 @@ const SpecialsPage = () => {
           }}
           className="!static"
         >
-          {specials.map((special) => (
+          {(specials || []).map((special) => (
             <SwiperSlide key={special.id}>
               <div>
                 <img
@@ -62,7 +42,7 @@ const SpecialsPage = () => {
                 />
                 <div className="grid grid-cols-2 gap-16">
                   <div className="">
-                    <h2 className="text-4xl font-serif mb-4">
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-4">
                       {special.title}
                     </h2>
                     <p className="text-bg-blue text-xl">

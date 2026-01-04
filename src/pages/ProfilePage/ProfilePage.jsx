@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
   return (
     <section className="container pt-20">
-      <h1 className="text-4xl font-serif mb-8">Личный кабинет</h1>
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-8">Личный кабинет</h1>
       <div className="bg-theme-100 p-8 rounded-lg">
         <h2 className="text-2xl font-bold mb-4">
           Добро пожаловать, {user.name}!

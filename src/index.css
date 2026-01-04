@@ -1,85 +1,37 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-blue: #4567aa;
-  --color-theme-blue: #4567aa;
-  --color-light-black: #202020;
-  --color-theme-50: #f9fafb;
-  --color-theme-100: #f3f4f6;
-  --color-theme-img: white;
-  --color-theme-login: white;
+  /* Цвета: Чистый Синий (Royal Blue) и Темный (Slate) */
+  --color-primary: #1e293b; 
+  
+  --color-accent: #1e40af;       
+  --color-accent-hover: #1e3a8a; 
+
+  --color-bg-light: #ffffff;
+  --color-bg-dark: #0f172a; 
+
+  --color-text-main: #0f172a;
+  --color-text-muted: #64748b;
+
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-light text-text-main font-sans antialiased transition-colors duration-300;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-semibold text-primary dark:text-gray-100;
+  }
 }
 
 @layer components {
   .container {
-    @apply max-w-[1400px] mx-auto px-4;
+    @apply mx-auto px-4 w-full max-w-7xl;
   }
 }
-html.dark {
-  --color-theme-50: #242527;
-  --color-theme-login: #e0e0e0;
-  --color-theme-img: #1b1a19;
-  --color-theme-100: #49494b;
-  --color-theme-blue: #ffffff;
-}
-body {
-  background-color: white;
-  color: #1f2a37;
-  transition: background-color 0.3s, color 0.3s;
-}
-#main-header {
-  background-color: white;
-  transition: background-color 0.3s;
-}
-#main-header .theme-icon {
-  color: #4666a9;
-}
-#main-header .theme-logo {
-  filter: none;
-}
-#main-header .theme-mode {
-  filter: none;
-}
-#side-menu {
-  background-color: white;
-  color: #1f2a37;
-}
-#booking {
-  background-color: white;
-  color: #1f2a37;
-}
 
-html.dark body {
-  background-color: #1b1a19;
-  color: #d1d5db;
-}
-html.dark #main-header {
-  background-color: #272523;
-}
-html.dark #main-header .theme-icon {
-  color: white;
-}
-html.dark #main-header .theme-logo {
-  filter: invert(1);
-}
-html.dark #main-header .theme-mode {
-  filter: invert(0.82);
-}
-html.dark #side-menu {
-  background-color: #1b1a19;
-  color: #d1d5db;
-  border-color: rgb(74, 69, 69);
-}
-html.dark #booking {
-  background-color: #1b1a19;
-  color: #d1d5db;
-}
-
-@layer components {
-  .container {
-    @apply max-w-[1400px] mx-auto px-4;
-  }
-}
-input[type="password"]::-ms-reveal {
-  display: none;
+.dark body {
+  @apply bg-bg-dark text-gray-300;
 }

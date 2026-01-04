@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext();
 
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }) => {
       const { password, ...userToSave } = foundUser;
       setUser(userToSave);
       localStorage.setItem("user", JSON.stringify(userToSave));
-      alert(`Добро пожаловать, ${userToSave.name}!`);
+      toast.success(`Добро пожаловать, ${userToSave.name}!`);
       navigate("/");
       return { success: true };
     } else {
@@ -80,7 +81,7 @@ export const AuthProvider = ({ children }) => {
 
     localStorage.setItem("usersDb", JSON.stringify(updatedUsersDb));
 
-    alert("Регистрация прошла успешно! Теперь вы можете войти.");
+    toast.success("Регистрация прошла успешно! Теперь вы можете войти.");
     navigate("/login");
     return { success: true };
   };

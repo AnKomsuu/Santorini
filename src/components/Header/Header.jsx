@@ -3,47 +3,41 @@ import { Link, useLocation } from "react-router-dom";
 import useClickOutside from "../../hooks/useClickOutside";
 import { useTheme } from "../../context/ThemeContext";
 import { useAuth } from "../../context/AuthContext";
-import { TbMenu } from "react-icons/tb";
-import { FiUser } from "react-icons/fi";
-import { IoMdClose } from "react-icons/io";
+import { TbMenu, TbX } from "react-icons/tb";
+import { FiUser, FiPhone, FiSun, FiMoon } from "react-icons/fi";
 import { BsArrowUpRight } from "react-icons/bs";
-import { FaPhoneAlt } from "react-icons/fa";
+
 import santorini from "../../assets/santorini.svg";
-import mode from "../../assets/mode.svg";
-import vk from "../../assets/vk.svg";
-import youtube from "../../assets/YouTube.svg";
-import zen from "../../assets/zen.svg";
 import SearchPanel from "../SearchPanel/SearchPanel";
 
 const navLinksInfo = [
-  { id: 1, path: "/rooms", title: "Номера и цены" },
-  { id: 2, path: "/about", title: "Об отеле" },
-  { id: 3, path: "/services", title: "Услуги" },
-  { id: 4, path: "/rulesPage", title: "Условия проживания" },
-  { id: 5, path: "/news", title: "Новости" },
-  { id: 6, path: "/contact", title: "контакты" },
-  { id: 7, path: "/photoHotel", title: "Фото отеля" },
-  { id: 8, path: "/road", title: "Как добраться" },
-  { id: 9, path: "/reviews", title: "Отзывы гостей" },
-];
-
-const navLinksPlace = [
-  { id: 1, path: "/attractionsPage", title: "Достопримечательности" },
-  { id: 2, path: "/pastaBarPage", title: "паста-бар" },
-  { id: 3, path: "/recreation", title: "Активный отдых" },
-  { id: 4, path: "/specials", title: "Спецпредложения" },
+  { id: 1, path: "/rooms", title: "Номера" },
+  { id: 2, path: "/services", title: "Услуги" },
+  { id: 3, path: "/specials", title: "Акции" },
+  { id: 4, path: "/news", title: "Блог" },
+  { id: 5, path: "/reviews", title: "Отзывы" },
+  { id: 6, path: "/contact", title: "Контакты" },
 ];
 
 const Header = ({ isSearchOpen, onSearchClose }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const menuRef = useRef(null);
   const location = useLocation();
-  const { toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const { isAuth } = useAuth();
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
     setMenuOpen(false);
-    document.body.style.overflow = '';
+    document.body.style.overflow = "";
   }, [location]);
 
   useClickOutside(menuRef, () => {
@@ -51,96 +45,163 @@ const Header = ({ isSearchOpen, onSearchClose }) => {
   });
 
   const toggleMenu = () => {
-    const newMenuState = !isMenuOpen;
-    setMenuOpen(newMenuState);
-    document.body.style.overflow = newMenuState ? 'hidden' : '';
+    setMenuOpen(!isMenuOpen);
+    document.body.style.overflow = !isMenuOpen ? "hidden" : "";
   };
 
-  const NavLink = ({ to, children }) => (
-    <Link to={to} className="hover:text-red-500 transition-colors uppercase">
-      {children}
-    </Link>
-  );
-
   return (
-    <header className="sticky top-0 z-50 py-4 bg-white shadow-md">
-      <div className="container">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-4 md:gap-x-8">
-            <button onClick={toggleMenu} aria-label="Открыть меню" aria-expanded={isMenuOpen} aria-controls="side-menu">
-              {isMenuOpen ? <IoMdClose className="text-3xl" /> : <TbMenu className="text-3xl" />}
+    <>
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled || isMenuOpen
+            ? "bg-white/95 dark:bg-[#0f172a]/95 backdrop-blur-md shadow-md py-3"
+            : "bg-white/0 dark:bg-[#0f172a]/0 py-5" /* Прозрачный фон в начале */
+        }`}
+      >
+        <div className="container flex items-center justify-between">
+          {/* Логотип и Бургер */}
+          <div className="flex items-center gap-x-4">
+            <button
+              onClick={toggleMenu}
+              className="lg:hidden text-slate-800 dark:text-white hover:text-blue-600 transition-colors"
+              aria-label="Меню"
+            >
+              {isMenuOpen ? <TbX size={28} /> : <TbMenu size={28} />}
             </button>
-            <Link to="/" aria-label="На главную">
-              <img className="w-28 md:w-36" src={santorini} alt="Логотип Santorini" />
+            
+            <Link to="/" className="block">
+              <img 
+                src={santorini} 
+                alt="Santorini" 
+                // Логотип: Цветной на белом фоне, Белый на темном фоне
+                className={`h-8 md:h-10 w-auto object-contain transition-all duration-300 ${
+                  isScrolled ? "dark:brightness-0 dark:invert" : "brightness-0 invert drop-shadow-md md:filter-none"
+                }`}
+              />
             </Link>
           </div>
 
-          <div className="flex items-center gap-x-4">
+          {/* Десктопное меню */}
+          <nav className="hidden lg:flex items-center gap-x-8">
+            {navLinksInfo.map((link) => (
+              <Link
+                key={link.id}
+                to={link.path}
+                className={`text-sm font-bold uppercase tracking-wider hover:text-blue-500 transition-colors relative group ${
+                   isScrolled ? "text-slate-800 dark:text-gray-200" : "text-slate-800 dark:text-white text-shadow-sm"
+                }`}
+              >
+                {link.title}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </nav>
+
+          {/* Правая часть */}
+          <div className="flex items-center gap-x-5">
+            <button
+              onClick={toggleTheme}
+              className={`hidden md:flex hover:text-blue-500 transition-colors ${
+                isScrolled ? "text-slate-800 dark:text-white" : "text-slate-800 dark:text-white"
+              }`}
+            >
+              {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
+            </button>
+
             {isAuth ? (
-              <Link to="/profile" className="text-2xl hover:text-bg-blue transition-colors" aria-label="Профиль пользователя">
-                <FiUser />
+              <Link
+                to="/profile"
+                className={`hover:text-blue-500 transition-colors ${
+                  isScrolled ? "text-slate-800 dark:text-white" : "text-slate-800 dark:text-white"
+                }`}
+              >
+                <FiUser size={22} />
               </Link>
             ) : (
-              <Link to="/login" className="hidden md:flex items-center gap-x-2 bg-bg-blue text-white px-6 py-2.5 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase">
-                Войти <BsArrowUpRight />
+              <Link
+                to="/login"
+                className={`hidden md:block text-sm font-bold uppercase tracking-wide hover:text-blue-500 ${
+                   isScrolled ? "text-slate-800 dark:text-white" : "text-slate-800 dark:text-white"
+                }`}
+              >
+                Войти
               </Link>
             )}
-            <Link to="/booking" className="flex items-center justify-center gap-x-2 bg-bg-blue text-white px-4 py-2.5 md:px-6 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase text-sm md:text-base">
-              <span className="hidden md:inline">забронировать</span>
-              <span className="md:hidden">Бронь</span>
-              <BsArrowUpRight className="text-lg" />
+
+            {/* Кнопка БРОНЬ: Синяя в светлой теме, Белая в темной */}
+            <Link
+              to="/booking"
+              className="flex items-center gap-x-2 px-6 py-2.5 rounded shadow-lg transition-all duration-300 transform hover:-translate-y-0.5
+                         bg-[#1e40af] text-white hover:bg-[#1e3a8a]
+                         dark:bg-white dark:text-[#0f172a] dark:hover:bg-gray-200"
+            >
+              <span className="text-xs font-bold uppercase tracking-widest">Бронь</span>
+              <BsArrowUpRight strokeWidth={1} />
             </Link>
           </div>
         </div>
+      </header>
 
-        <button onClick={toggleTheme} className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-full p-3 theme-mode rounded-full shadow-lg bg-white hover:bg-gray-100 transition-colors" aria-label="Сменить тему">
-          <img src={mode} alt="Смена темы" className="w-10 h-10" />
-        </button>
-
-        <nav
-          id="side-menu"
-          ref={menuRef}
-          className={`fixed top-0 left-0 w-full h-full bg-white transform transition-transform duration-300 ease-in-out z-40 md:absolute md:w-[40rem] md:h-auto md:top-full md:rounded-br-lg md:shadow-lg ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}
-        >
-          <div className="flex flex-col h-full">
-            <div className="flex-grow p-8 pt-24 md:p-10 overflow-y-auto">
-              <div className="flex flex-col md:flex-row gap-10 md:gap-20 text-center md:text-left text-lg">
-                <div className="flex flex-col gap-y-5 leading-relaxed">
-                  {navLinksInfo.map((item) => <NavLink key={item.id} to={item.path}>{item.title}</NavLink>)}
-                </div>
-                <div className="flex flex-col gap-y-5 leading-relaxed">
-                  {navLinksPlace.map((item) => <NavLink key={item.id} to={item.path}>{item.title}</NavLink>)}
-                  {!isAuth && (
-                    <Link to="/login" className="md:hidden flex items-center justify-center gap-x-2 bg-bg-blue text-white px-6 py-3 mt-4 rounded-md font-medium hover:bg-blue-800 transition-colors uppercase">
-                      Войти <BsArrowUpRight />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="flex-shrink-0 p-6 border-t-2 border-theme-blue flex flex-col md:flex-row justify-between items-center gap-6 text-theme-blue">
-              <div className="text-center md:text-left">
-                <a href="tel:89120388044" className="flex items-center justify-center md:justify-start gap-x-2 mb-2 hover:text-opacity-80 transition-opacity">
-                  <FaPhoneAlt />
-                  8(912) 038-80-44
-                </a>
-                <div className="flex items-center justify-center md:justify-start gap-x-4">
-                  <a href="https://vk.com" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={vk} alt="Вконтакте" /></a>
-                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={youtube} alt="YouTube" /></a>
-                  <a href="https://dzen.ru" target="_blank" rel="noopener noreferrer"><img className="w-7 h-7 hover:opacity-80 transition-opacity" src={zen} alt="Дзен" /></a>
-                  <button onClick={toggleTheme} className="lg:hidden" aria-label="Сменить тему"><img src={mode} alt="Смена темы" className="w-7 h-7" /></button>
-                </div>
-              </div>
-              <p className="text-sm text-center md:text-left max-w-xs">
-                298690, Россия, Крым, г. Ялта, пгт Форос, Форосский спуск, 1
-              </p>
+      {/* Мобильное меню */}
+      <div
+        ref={menuRef}
+        className={`fixed inset-y-0 left-0 w-[85%] max-w-sm bg-white dark:bg-[#0f172a] shadow-2xl transform transition-transform duration-300 ease-out z-50 lg:hidden ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col h-full p-6">
+          <div className="flex justify-between items-center mb-10">
+            <img src={santorini} alt="Santorini" className="h-8 dark:brightness-0 dark:invert" />
+            <div className="flex items-center gap-x-4">
+              <button onClick={toggleTheme} className="text-slate-800 dark:text-white">
+                {theme === "dark" ? <FiSun size={24} /> : <FiMoon size={24} />}
+              </button>
+              <button onClick={toggleMenu} className="text-gray-500 dark:text-gray-400">
+                <TbX size={26} />
+              </button>
             </div>
           </div>
-        </nav>
+
+          <div className="flex flex-col gap-y-6 overflow-y-auto flex-grow">
+            {navLinksInfo.map((link) => (
+              <Link
+                key={link.id}
+                to={link.path}
+                className="text-lg font-serif font-bold text-slate-800 dark:text-gray-100 border-b border-gray-100 dark:border-gray-800 pb-3"
+                onClick={() => setMenuOpen(false)}
+              >
+                {link.title}
+              </Link>
+            ))}
+            <Link
+              to="/specials"
+              className="text-lg font-serif font-bold text-blue-600 dark:text-blue-400 border-b border-gray-100 dark:border-gray-800 pb-3"
+              onClick={() => setMenuOpen(false)}
+            >
+              Спецпредложения
+            </Link>
+          </div>
+
+          <div className="mt-auto pt-8 border-t border-gray-100 dark:border-gray-800">
+            <a href="tel:89120388044" className="flex items-center gap-x-3 text-lg font-medium text-slate-800 dark:text-white mb-4">
+              <FiPhone className="text-blue-600" />
+              8 (912) 038-80-44
+            </a>
+            {!isAuth && (
+              <Link
+                to="/login"
+                className="block w-full text-center border-2 border-[#1e40af] text-[#1e40af] dark:border-white dark:text-white py-3 rounded uppercase font-bold text-xs tracking-widest hover:bg-[#1e40af] hover:text-white dark:hover:bg-white dark:hover:text-[#0f172a] transition-colors"
+                onClick={() => setMenuOpen(false)}
+              >
+                Войти в аккаунт
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
+      
       <SearchPanel isOpen={isSearchOpen} onClose={onSearchClose} />
-    </header>
+    </>
   );
 };
 

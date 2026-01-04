@@ -4,6 +4,7 @@ import { FaRegCommentAlt } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const SectionBookingForm = ({
   variant = "full",
@@ -27,6 +28,8 @@ const SectionBookingForm = ({
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [dateError, setDateError] = useState("");
+  const [commentError, setCommentError] = useState("");
+  const [agreementError, setAgreementError] = useState("");
 
   const navigate = useNavigate();
 
@@ -66,6 +69,8 @@ const SectionBookingForm = ({
     setNameError("");
     setPhoneError("");
     setDateError("");
+    setCommentError("");
+    setAgreementError("");
 
     let isValid = true;
 
@@ -93,12 +98,12 @@ const SectionBookingForm = ({
     }
 
     if (showComment && comment.trim().length < 10) {
-      alert("Сообщение должно быть не менее 10 символов.");
+      setCommentError("Сообщение должно быть не менее 10 символов.");
       isValid = false;
     }
 
     if (!agreed) {
-      alert("Пожалуйста, подтвердите согласие с политикой конфиденциальности.");
+      setAgreementError("Пожалуйста, подтвердите согласие с политикой конфиденциальности.");
       isValid = false;
     }
 
@@ -112,7 +117,7 @@ const SectionBookingForm = ({
         (booking) => booking.userId === user.id && booking.itemName === itemName
       );
       if (hasAlreadyBooked) {
-        alert("Вы уже подавали заявку на это предложение.");
+        toast.error("Вы уже подавали заявку на это предложение.");
         return;
       }
     }
@@ -132,8 +137,7 @@ const SectionBookingForm = ({
     const updatedBookings = [...allBookings, bookingData];
     localStorage.setItem("bookings", JSON.stringify(updatedBookings));
 
-    console.log("Отправка данных:", bookingData);
-    alert("Спасибо! Ваша заявка принята.");
+    toast.success("Спасибо! Ваша заявка принята.");
     navigate("/");
   };
 
@@ -292,12 +296,22 @@ const SectionBookingForm = ({
                   <FaRegCommentAlt className="mt-1 mx-1" />
                   <textarea
                     value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    onChange={(e) => {
+                      setComment(e.target.value);
+                      if (commentError && e.target.value.trim().length >= 10) {
+                        setCommentError("");
+                      }
+                    }}
                     placeholder="Ваше сообщение (минимум 10 символов)"
                     required
                     className="w-full outline-none resize-none"
                   ></textarea>
                 </div>
+                {commentError && (
+                  <p className="md:col-span-2 text-red-500 text-sm mt-1 ml-2">
+                    {commentError}
+                  </p>
+                )}
               </>
             )}
 
@@ -323,7 +337,12 @@ const SectionBookingForm = ({
                 type="checkbox"
                 id="agreement"
                 checked={agreed}
-                onChange={(e) => setAgreed(e.target.checked)}
+                onChange={(e) => {
+                  setAgreed(e.target.checked);
+                  if (agreementError && e.target.checked) {
+                    setAgreementError("");
+                  }
+                }}
                 className="cursor-pointer mr-1"
               />
               Нажимая на кнопку, вы автоматически соглашаетесь с
@@ -334,6 +353,9 @@ const SectionBookingForm = ({
               >
                 Политикой конфиденциальности
               </a>
+              {agreementError && (
+                <p className="text-red-500 text-sm mt-1">{agreementError}</p>
+              )}
             </div>
           </form>
         </div>

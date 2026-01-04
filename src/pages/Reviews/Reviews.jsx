@@ -1,46 +1,32 @@
 import fon from "../../assets/roadFon.jpg";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
+import useData from "../../hooks/useData";
+import api from "../../services/api";
 
 const ITEMS_PER_PAGE = 6;
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { data: reviews, loading, error } = useData(api.getReviews);
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get("/db.json");
-        setReviews(response.data.reviews);
-      } catch (err) {
-        setError("Не удалось загрузить данные.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchReviews();
-  }, []);
   if (loading) return <div>Загрузка...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <>
       <div className="container">
-        <div className="relative mb-25">
+        <div className="relative mb-20 md:mb-25">
           <img className="rounded-b-2xl" src={fon} alt="" />
           <p
-            className="absolute bottom-0 left-[29%] text-4xl uppercase
-                          pt-8 px-15 bg-theme-img rounded-t-[40px] font-serif"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 text-2xl md:text-4xl uppercase
+                          pt-8 px-4 md:px-15 bg-theme-img rounded-t-[40px] font-serif text-center"
           >
             отзывы о santorini
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-          {reviews.slice(0, visibleCount).map((review) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+          {(reviews || []).slice(0, visibleCount).map((review) => (
             <div
               key={review.id}
               className="p-8 rounded-2xl border border-theme-blue shadow-sm"
@@ -80,7 +66,7 @@ const Reviews = () => {
         </div>
 
         <div className="text-center mt-16">
-          {visibleCount < reviews.length && (
+          {visibleCount < (reviews?.length || 0) && (
             <button
               onClick={() => setVisibleCount((prev) => prev + ITEMS_PER_PAGE)}
               className="text-lg underline cursor-pointer text-bg-blue hover:text-orange-500"

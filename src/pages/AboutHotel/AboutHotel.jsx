@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-
 import { FaHeart, FaLeaf, FaUtensils, FaUsers } from "react-icons/fa";
+import Button from "../../components/UI/Button";
 
 import fon from "../../assets/aboutFon.jpg";
 import beach from "../../assets/beach.jpg";
@@ -50,15 +49,15 @@ const teamData = [
 const AboutHotel = () => {
   return (
     <>
-      <section className="relative w-378 mx-auto h-[500px] flex items-center justify-center text-center">
+      <section className="relative w-full h-[500px]">
         <img
           src={fon}
           alt="Территория отеля Santorini"
-          className="absolute w-full h-full object-cover"
+          className="w-full h-full object-cover"
         />
-        <div className="relative text-white">
-          <h2 className="text-6xl font-serif">Наша философия гостеприимства</h2>
-          <p className="mt-5 text-xl max-w-2xl mx-auto">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif">Наша философия гостеприимства</h2>
+          <p className="mt-5 text-lg md:text-xl max-w-2xl mx-auto">
             Узнайте, почему Santorini — это больше, чем просто отель на берегу
             моря.
           </p>
@@ -68,7 +67,7 @@ const AboutHotel = () => {
       <section className="py-20">
         <div className="container grid grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-4xl font-serif text-bg-blue">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-bg-blue">
               Место, где встречаются море и душа
             </h2>
             <p className="mt-8 mb-3">
@@ -96,7 +95,7 @@ const AboutHotel = () => {
 
       <section className="py-20 bg-background-secondary">
         <div className="container text-center">
-          <h2 className="text-4xl font-serif mb-2">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-2">
             Что делает ваш отдых особенным
           </h2>
           <p className="text-lg text-gray-500 mb-12">
@@ -105,7 +104,7 @@ const AboutHotel = () => {
           <div className="grid grid-cols-4 gap-8">
             {valuesData.map((value, index) => (
               <div key={index} className="p-6">
-                <div className="text-5xl text-bg-blue inline-block mb-4">
+                <div className="text-3xl md:text-4xl lg:text-5xl text-bg-blue inline-block mb-4">
                   {value.icon}
                 </div>
                 <h3 className="text-xl font-bold mb-2">{value.title}</h3>
@@ -118,24 +117,24 @@ const AboutHotel = () => {
 
       <section className="py-20 bg-bg-blue text-white">
         <div className="container text-center">
-          <h2 className="text-4xl font-serif mb-15">Santorini в цифрах</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-12 md:mb-15">Santorini в цифрах</h2>
           <div className="grid grid-cols-4 gap-8">
             <div>
-              <p className="text-5xl font-bold">5 Га</p>
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold">5 Га</p>
               <p className="mt-2 opacity-80">ухоженной парковой территории</p>
             </div>
             <div>
-              <p className="text-5xl font-bold">30 м</p>
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold">30 м</p>
               <p className="mt-2 opacity-80">до собственного галечного пляжа</p>
             </div>
             <div>
-              <p className="text-5xl font-bold">2</p>
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold">2</p>
               <p className="mt-2 opacity-80">
                 бассейна с морской и пресной водой
               </p>
             </div>
             <div>
-              <p className="text-5xl font-bold">10+</p>
+              <p className="text-3xl md:text-4xl lg:text-5xl font-bold">10+</p>
               <p className="mt-2 opacity-80">
                 лет опыта в создании безупречного отдыха
               </p>
@@ -146,7 +145,7 @@ const AboutHotel = () => {
 
       <section className="py-20">
         <div className="container text-center">
-          <h2 className="text-4xl font-serif mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-12">
             Люди, которые создают уют
           </h2>
           <div className="grid grid-cols-2 gap-12 max-w-4xl mx-auto">
@@ -174,12 +173,9 @@ const AboutHotel = () => {
           <h2 className="text-3xl font-serif mb-10">
             Готовы стать частью нашей истории?
           </h2>
-          <Link
-            to="/rooms"
-            className="px-10 py-4 bg-bg-blue text-white uppercase rounded-lg font-bold"
-          >
+          <Button to="/rooms" variant="primary" className="px-10 py-4">
             Выбрать номер
-          </Link>
+          </Button>
         </div>
       </section>
     </>

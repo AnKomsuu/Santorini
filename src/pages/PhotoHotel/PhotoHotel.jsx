@@ -93,7 +93,7 @@ const PhotoHotel = () => {
       <section className="container">
         <div className="relative py-20 mx-auto w-170 my-20 text-center">
           <img className="absolute bottom-0" src={decore} alt="" />
-          <h2 className="text-4xl uppercase ">Виды нашего отеля</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl uppercase ">Виды нашего отеля</h2>
         </div>
         <div className="grid grid-cols-5 gap-4 grid-rows-2">
           {galleryData.map((photo) => (

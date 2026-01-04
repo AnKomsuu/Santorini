@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { FaUtensils, FaBaby, FaUmbrellaBeach } from "react-icons/fa";
+import Button from "../../components/UI/Button";
 
 import grace from "../../assets/grace.jpg";
 import pubPool from "../../assets/pubPool.jpg";
@@ -10,13 +10,13 @@ import fon from "../../assets/wellness.jpg";
 const Services = () => {
   return (
     <>
-      <section className="relative w-378 mx-auto h-[400px] text-center">
+      <section className="relative w-full h-[400px]">
         <img className="w-full h-full object-cover" src={fon} alt="" />
-        <div className="absolute bottom-25 left-50 text-white">
-          <h2 className="text-6xl font-serif">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif">
             Услуги для вашего идеального отдыха
           </h2>
-          <p className="mt-6 text-xl max-w-3xl mx-auto">
+          <p className="mt-6 text-lg md:text-xl max-w-3xl mx-auto">
             От расслабляющих СПА-ритуалов до гастрономических изысков — мы
             продумали каждую деталь вашего комфорта.
           </p>
@@ -24,7 +24,7 @@ const Services = () => {
       </section>
 
       <section className="py-20 container text-center">
-        <h2 className="text-4xl font-serif mb-12">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-12">
           Откройте для себя все возможности
         </h2>
         <div className="flex justify-center gap-x-8">
@@ -32,21 +32,21 @@ const Services = () => {
             href="#gastronomy"
             className="w-60 py-6 border rounded-lg text-theme-blue hover:shadow-lg transition-shadow"
           >
-            <FaUtensils className="text-5xl mx-auto mb-4" />
+            <FaUtensils className="text-3xl md:text-4xl lg:text-5xl mx-auto mb-4" />
             <h3 className="font-bold text-lg">Гастрономия</h3>
           </a>
           <a
             href="#pool"
             className="w-60 py-6 border rounded-lg text-theme-blue hover:shadow-lg transition-shadow"
           >
-            <FaUmbrellaBeach className="text-5xl mx-auto mb-4" />
+            <FaUmbrellaBeach className="text-3xl md:text-4xl lg:text-5xl mx-auto mb-4" />
             <h3 className="font-bold text-xl">Оазис</h3>
           </a>
           <a
             href="#family"
             className="w-60 py-6 border rounded-lg text-theme-blue hover:shadow-lg transition-shadow"
           >
-            <FaBaby className="text-5xl mx-auto mb-4" />
+            <FaBaby className="text-3xl md:text-4xl lg:text-5xl mx-auto mb-4" />
             <h3 className="font-bold text-lg">Для детей и семьи</h3>
           </a>
         </div>
@@ -54,7 +54,7 @@ const Services = () => {
 
       <section id="gastronomy" className="py-20 bg-theme-50">
         <div className="container">
-          <h2 className="text-5xl font-serif text-center mb-15">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif text-center mb-12 md:mb-15">
             Искусство вкуса
           </h2>
           <div className="grid grid-cols-3 gap-x-12 items-center">
@@ -66,7 +66,7 @@ const Services = () => {
               />
             </div>
             <div>
-              <h3 className="text-4xl mb-10">Ресторан 'Grace'</h3>
+              <h3 className="text-2xl md:text-3xl lg:text-4xl mb-10">Ресторан 'Grace'</h3>
               <p className="text-xl">
                 Наш фирменный ресторан с панорамным видом на море, где шеф-повар
                 представляет авторский взгляд на классическую крымскую и
@@ -84,7 +84,7 @@ const Services = () => {
               />
             </div>
             <div>
-              <h3 className="text-4xl mb-10">Бар 'Breeze' у бассейна</h3>
+              <h3 className="text-2xl md:text-3xl lg:text-4xl mb-10">Бар 'Breeze' у бассейна</h3>
               <p className="text-xl">
                 Идеальное место, чтобы насладиться освежающим коктейлем,
                 свежевыжатым соком или легкими закусками, не отходя от бассейна.
@@ -106,7 +106,7 @@ const Services = () => {
           </div>
 
           <div>
-            <h2 className="text-4xl font-serif mb-8">Оазис солнца и воды</h2>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-8">Оазис солнца и воды</h2>
             <p className="text-lg mb-6">
               Наш отель предлагает идеальные условия как для активного, так и
               для умиротворенного отдыха у воды. Наслаждайтесь чистым морем на
@@ -149,7 +149,7 @@ const Services = () => {
       <section id="family" className="py-20 bg-theme-50">
         <div className="container grid grid-cols-2 gap-x-12 items-center">
           <div>
-            <h2 className="text-4xl font-serif mb-8">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif mb-8">
               Счастливые моменты для всей семьи
             </h2>
             <ul className="space-y-4 text-lg">
@@ -189,12 +189,9 @@ const Services = () => {
         <h2 className="text-3xl font-serif mb-10">
           Готовы выбрать свой идеальный отдых?
         </h2>
-        <Link
-          to="/rooms"
-          className="px-10 py-4 bg-bg-blue text-white uppercase rounded-lg font-bold"
-        >
+        <Button to="/rooms" variant="primary" className="px-10 py-4">
           Перейти к выбору номера
-        </Link>
+        </Button>
       </section>
     </>
   );

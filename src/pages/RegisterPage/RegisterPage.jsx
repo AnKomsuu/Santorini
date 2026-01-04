@@ -32,7 +32,6 @@ const RegisterPage = () => {
       if (errors.name) {
         setErrors((prev) => ({ ...prev, name: undefined }));
       }
-    } else {
     }
   };
 
@@ -110,7 +109,7 @@ const RegisterPage = () => {
   return (
     <div className="flex items-center justify-center min-h-screen bg-theme-img">
       <div className="w-full max-w-md p-8 space-y-6 text-white bg-orange-400 rounded-xl">
-        <h2 className="text-4xl font-serif text-center italic">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-center italic">
           Создать аккаунт
         </h2>
 

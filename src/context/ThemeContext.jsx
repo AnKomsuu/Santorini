@@ -14,13 +14,11 @@ export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     const root = window.document.documentElement;
 
+    // ВАЖНО: Удаляем старый класс и добавляем новый
     root.classList.remove("light", "dark");
-
     root.classList.add(theme);
 
     localStorage.setItem("theme", theme);
-
-    console.log(`Установлен класс: ${theme}`);
   }, [theme]);
 
   return (

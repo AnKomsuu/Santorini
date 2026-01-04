@@ -1,38 +1,16 @@
 import fon from "../../assets/RecreationFon.png";
 import svg from "../../assets/Recreation.svg";
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState } from "react";
 import { BsArrowUpRight } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import useData from "../../hooks/useData";
+import api from "../../services/api";
 
 const ITEMS_PER_PAGE = 8;
 
 const RecreationPage = () => {
-  const [activities, setActivities] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [visibleCount, setVisibleCount] = useState(ITEMS_PER_PAGE);
-
-  useEffect(() => {
-    const fetchActivities = async () => {
-      try {
-        const response = await axios.get("/db.json");
-
-        if (response.data && response.data.activities) {
-          setActivities(response.data.activities);
-        } else {
-          setError("Раздел 'activities' не найден в db.json");
-        }
-      } catch (err) {
-        setError("Не удалось загрузить данные.");
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchActivities();
-  }, []);
+  const { data: activities, loading, error } = useData(api.getActivities);
 
   if (loading) {
     return (
@@ -47,18 +25,18 @@ const RecreationPage = () => {
   }
   return (
     <section className="container">
-      <div className="relative mb-37.5">
+      <div className="relative mb-20 md:mb-37.5">
         <img className="rounded-b-2xl" src={fon} alt="" />
         <p
-          className="absolute bottom-0 left-[24%] text-5xl uppercase
-                          pt-9 px-25 bg-theme-img rounded-t-[50px] font-serif"
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 text-3xl md:text-4xl lg:text-5xl uppercase
+                          pt-9 px-4 md:px-25 bg-theme-img rounded-t-[50px] font-serif text-center"
         >
           Активный отдых
         </p>
         <img className="absolute bottom-[-100px] left-[65%]" src={svg} alt="" />
       </div>
       <div className="grid grid-cols-5 gap-15">
-        {activities.slice(0, visibleCount).map((activity, index) => {
+        {(activities || []).slice(0, visibleCount).map((activity, index) => {
           const rowIndex = Math.floor(index / 2);
           const shouldBeRounded = rowIndex % 2 === 0;
           const isLeftColumn = index % 2 === 0;
@@ -96,7 +74,7 @@ const RecreationPage = () => {
         })}
       </div>
       <div className="text-center mt-16">
-        {visibleCount < activities.length ? (
+        {visibleCount < (activities?.length || 0) ? (
           <button
             onClick={() =>
               setVisibleCount((prevCount) => prevCount + ITEMS_PER_PAGE)
@@ -106,7 +84,7 @@ const RecreationPage = () => {
             Смотреть еще
           </button>
         ) : (
-          activities.length > ITEMS_PER_PAGE && (
+          (activities?.length || 0) > ITEMS_PER_PAGE && (
             <button
               onClick={() => setVisibleCount(ITEMS_PER_PAGE)}
               className="px-10 py-4 uppercase cursor-pointer border-2 border-theme-blue rounded-lg text-theme-blue font-medium hover:bg-bg-blue hover:text-white transition-colors"

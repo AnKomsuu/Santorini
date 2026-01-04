@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
 import fon from "../../assets/errorFon.jpg";
+import Button from "../../components/UI/Button";
 import decore from "../../assets/errorDecore.png";
 
 const NotFoundPage = () => {
   return (
     <>
       <section className="container text-center">
-        <div className="relative mb-30">
+        <div className="relative mb-20 md:mb-30">
           <img className="rounded-b-2xl" src={fon} alt="" />
           <p
-            className="absolute bottom-[-60px] text-left text-4xl uppercase
+            className="absolute bottom-[-60px] text-left text-2xl md:text-3xl lg:text-4xl uppercase
                                   pt-9 px-15 bg-theme-img rounded-tr-[40px] font-serif leading-snug"
           >
             Ого... Так далеко даже мы <br /> не заходили
@@ -31,12 +31,9 @@ const NotFoundPage = () => {
         </p>
 
         <div className="mt-12">
-          <Link
-            to="/"
-            className="px-8 py-4 bg-bg-blue text-white rounded-lg font-bold uppercase"
-          >
+          <Button to="/" variant="primary" className="px-8 py-4">
             Вернуться на главную
-          </Link>
+          </Button>
         </div>
       </section>
     </>

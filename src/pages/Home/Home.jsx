@@ -6,6 +6,7 @@ import Services from "./Services/Services";
 import Adventure from "./Adventure/Adventure";
 import Offers from "./Offers/Offers";
 import Video from "./Video/Video";
+import FadeIn from "../../components/UI/FadeIn";
 
 const Home = () => {
   const location = useLocation();
@@ -24,17 +25,29 @@ const Home = () => {
   }, [location.state]);
   return (
     <>
-      <Comfort />
-      <Rooms />
-      <Services />
-      <div id="adventure-section">
-        <Adventure
-          activeCategory={activeCategory}
-          setActiveCategory={setActiveCategory}
-        />
-      </div>
-      <Offers />
-      <Video />
+      <FadeIn>
+        <Comfort />
+      </FadeIn>
+      <FadeIn delay={0.1}>
+        <Rooms />
+      </FadeIn>
+      <FadeIn delay={0.2}>
+        <Services />
+      </FadeIn>
+      <FadeIn delay={0.3}>
+        <div id="adventure-section">
+          <Adventure
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
+        </div>
+      </FadeIn>
+      <FadeIn delay={0.4}>
+        <Offers />
+      </FadeIn>
+      <FadeIn delay={0.5}>
+        <Video />
+      </FadeIn>
     </>
   );
 };

@@ -9,11 +9,11 @@ const Contact = () => {
       <section className="container">
         <div className="relative">
           <img className="rounded-b-2xl" src={fon} alt="" />
-          <FaLocationDot className="text-red-500 top-[30%] right-[44%] absolute text-4xl" />
+          <FaLocationDot className="text-red-500 top-[30%] right-[44%] absolute text-2xl md:text-3xl lg:text-4xl" />
         </div>
-        <div className="flex justify-between">
-          <div className="pl-20 pr-30 pt-11">
-            <h3 className="uppercase text-4xl">свяжитесь с нами</h3>
+        <div className="flex flex-col md:flex-row justify-between gap-8">
+          <div className="px-4 md:pl-20 md:pr-30 pt-11">
+            <h3 className="uppercase text-2xl md:text-3xl lg:text-4xl">свяжитесь с нами</h3>
             <p className="flex items-center gap-x-4 mt-12">
               <FaLocationDot className="text-2xl" />
               298690, Россия, Крым, г. Ялта, пгт Форос, Форосский <br /> спуск,

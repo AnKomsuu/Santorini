@@ -1,5 +1,6 @@
 import { GoPeople } from "react-icons/go";
 import { Link } from "react-router-dom";
+import Button from "../UI/Button";
 
 const RoomCard = ({ room }) => {
   return (
@@ -24,20 +25,22 @@ const RoomCard = ({ room }) => {
               <span>{room.view}</span>
             </div>
           </div>
-          <div className="flex justify-between items-center">
-            <Link
+          <div className="flex justify-between items-center gap-4 flex-wrap">
+            <Button
               to={`/rooms/${room.id}`}
               state={{ scrollToBooking: true }}
-              className="py-5 px-10 uppercase hover:bg-orange-500 bg-bg-blue text-white cursor-pointer rounded-xs"
+              variant="primary"
+              className="py-5 px-10 rounded-xs"
             >
               ЗАБРОНИРОВАТЬ
-            </Link>
-            <Link
+            </Button>
+            <Button
               to={`/rooms/${room.id}`}
-              className="px-10 py-5 border border-bg-blue rounded-xs text-bg-blue font-medium hover:bg-bg-blue hover:text-white"
+              variant="outline"
+              className="px-10 py-5 rounded-xs"
             >
               ПОДРОБНЕЕ
-            </Link>
+            </Button>
           </div>
         </div>
       </div>

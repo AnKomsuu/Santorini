@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import fon from "../../assets/rulesPageFon.jpg";
+import Button from "../../components/UI/Button";
 import {
   FaClock,
   FaChild,
@@ -36,11 +37,11 @@ const rulesData = [
 const RulesPage = () => {
   return (
     <>
-      <section className="relative w-378 mx-auto h-[400px] ">
+      <section className="relative w-full h-[400px]">
         <img className="w-full h-full object-cover" src={fon} alt="" />
-        <div className="text-center absolute text-white bottom-40 left-[25%]">
-          <h2 className="text-6xl font-serif">Правила проживания</h2>
-          <p className="mt-8 text-xl max-w-2xl mx-auto">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif">Правила проживания</h2>
+          <p className="mt-8 text-lg md:text-xl max-w-2xl mx-auto">
             Для вашего комфорта и безопасности, просим ознакомиться с нашими
             правилами.
           </p>
@@ -50,7 +51,7 @@ const RulesPage = () => {
       <section className="py-20">
         <div className="container grid grid-cols-3 gap-8 text-center">
           <div className="p-6">
-            <FaClock className="text-5xl text-bg-blue mx-auto mb-4" />
+            <FaClock className="text-3xl md:text-4xl lg:text-5xl text-bg-blue mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">Заезд и выезд</h3>
             <p className="text-gray-600">
               Заезд — после 14:00. Выезд — до 12:00. Возможность раннего заезда
@@ -58,7 +59,7 @@ const RulesPage = () => {
             </p>
           </div>
           <div className="p-6">
-            <FaChild className="text-5xl text-bg-blue mx-auto mb-4" />
+            <FaChild className="text-3xl md:text-4xl lg:text-5xl text-bg-blue mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">Проживание с детьми</h3>
             <p className="text-gray-600">
               Дети до 5 лет проживают бесплатно без предоставления
@@ -67,7 +68,7 @@ const RulesPage = () => {
             </p>
           </div>
           <div className="p-6">
-            <FaPaw className="text-5xl text-bg-blue mx-auto mb-4" />
+            <FaPaw className="text-3xl md:text-4xl lg:text-5xl text-bg-blue mx-auto mb-4" />
             <h3 className="text-2xl font-bold mb-2">Проживание с животными</h3>
             <p className="text-gray-600">
               Мы любим животных, но для обеспечения комфорта и безопасности всех
@@ -79,7 +80,7 @@ const RulesPage = () => {
 
       <section className="py-20 bg-theme-50">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-serif text-center mb-12">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif text-center mb-12">
             Подробные условия
           </h2>
           <div className="space-y-8">
@@ -116,12 +117,9 @@ const RulesPage = () => {
                 8 (800) 555-35-35
               </a>
             </div>
-            <Link
-              to="/faq"
-              className="px-8 py-4 bg-bg-blue text-white uppercase rounded-lg font-bold"
-            >
+            <Button to="/faq" variant="primary" className="px-8 py-4">
               Частые вопросы
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
