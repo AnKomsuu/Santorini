@@ -1,74 +1,42 @@
 import axios from "axios";
 
-// Имитация задержки для реалистичности
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const DB_URL = "/db.json";
 
-// Базовый URL для API
-const API_BASE_URL = "/db.json";
-
-// Функция для получения данных с задержкой
-const fetchWithDelay = async (url, delayMs = 300) => {
-  await delay(delayMs);
-  const response = await axios.get(url);
+const fetchDb = async () => {
+  const response = await axios.get(DB_URL);
   return response.data;
 };
 
-// API сервис
 const api = {
-  /**
-   * Получить все номера
-   * @returns {Promise<Array>}
-   */
-  getRooms: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.rooms || [];
+  async getRooms() {
+    const db = await fetchDb();
+    return db.rooms || [];
   },
 
-  /**
-   * Получить все активности
-   * @returns {Promise<Array>}
-   */
-  getActivities: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.activities || [];
+  async getActivities() {
+    const db = await fetchDb();
+    return db.activities || [];
   },
 
-  /**
-   * Получить все новости
-   * @returns {Promise<Array>}
-   */
-  getNews: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.news || [];
+  async getNews() {
+    const db = await fetchDb();
+    return db.news || [];
   },
 
-  /**
-   * Получить все отзывы
-   * @returns {Promise<Array>}
-   */
-  getReviews: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.reviews || [];
+  async getSpecials() {
+    const db = await fetchDb();
+    return db.specials || [];
   },
 
-  /**
-   * Получить все спецпредложения
-   * @returns {Promise<Array>}
-   */
-  getSpecials: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.specials || [];
+  async getReviews() {
+    const db = await fetchDb();
+    return db.reviews || [];
   },
 
-  /**
-   * Получить все достопримечательности
-   * @returns {Promise<Array>}
-   */
-  getAttractions: async () => {
-    const data = await fetchWithDelay(API_BASE_URL);
-    return data.attractions || [];
+  async getAttractions() {
+    const db = await fetchDb();
+    return db.attractions || [];
   },
 };
 
 export default api;
-

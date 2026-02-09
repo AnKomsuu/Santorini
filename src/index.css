@@ -1,28 +1,40 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
 @theme {
-  /* Цвета: Чистый Синий (Royal Blue) и Темный (Slate) */
-  --color-primary: #1e293b; 
+  /* --- НОВАЯ ПАЛИТРА SANTORINI 2.0 --- */
+
+  /* Основной цвет (Бренд): Глубокий Королевский Синий */
+  --color-primary: #003580; 
+  /* Акцент (Кнопки, ховеры): Яркий, но строгий синий */
+  --color-accent: #006ce4;       
+
+  /* Фоны */
+  --color-bg-light: #ffffff; /* Чистый белый */
   
-  --color-accent: #1e40af;       
-  --color-accent-hover: #1e3a8a; 
+  /* ВАЖНО: Новый цвет темной темы. Не синий, а благородный темный графит */
+  --color-bg-dark: #121212; 
+  --color-surface-dark: #1e1e1e; /* Цвет для карточек в темной теме */
 
-  --color-bg-light: #ffffff;
-  --color-bg-dark: #0f172a; 
+  /* Текст */
+  --color-text-main: #1a1a1a;
+  --color-text-muted: #595959;
+  --color-text-dark: #e5e5e5; /* Текст в темной теме */
 
-  --color-text-main: #0f172a;
-  --color-text-muted: #64748b;
-
+  /* Шрифты */
   --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
 }
 
 @layer base {
   body {
-    @apply bg-bg-light text-text-main font-sans antialiased transition-colors duration-300;
+    /* Плавный переход цвета при смене темы */
+    @apply bg-bg-light text-text-main font-sans antialiased transition-colors duration-500 ease-in-out;
   }
+  
+  /* Заголовки */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif font-semibold text-primary dark:text-gray-100;
+    @apply font-serif font-bold text-primary dark:text-white transition-colors duration-300;
   }
 }
 
@@ -32,6 +44,12 @@
   }
 }
 
+/* Глобальные настройки темной темы */
 .dark body {
-  @apply bg-bg-dark text-gray-300;
+  @apply bg-bg-dark text-text-dark;
 }
+
+/* Скроллбар */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-gray-300 dark:bg-gray-700 rounded-full; }

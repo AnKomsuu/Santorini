@@ -1,6 +1,6 @@
 import { GoPeople } from "react-icons/go";
 import { Link } from "react-router-dom";
-import Button from "../UI/Button";
+import Button from "../ui/Button";
 
 const RoomCard = ({ room }) => {
   return (
