@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Comfort from "./Comfort/Comfort";
-import Rooms from "./Rooms/Rooms";
+import Comfort from "../components/home-sections/Comfort/Comfort"; 
+import Rooms from "../components/home-sections/Rooms/Rooms";
 import Services from "../components/home-sections/ServicesPreview/Services";
 import Adventure from "../components/home-sections/Adventure/Adventure";
 import Offers from "../components/home-sections/Offers/Offers";

@@ -1,10 +1,10 @@
 import { useParams, useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import AboutRoom from "./AboutRoom/AboutRoom";
-import RoomVideo from "./RoomVideo/RoomVideo";
-import RoomGallery from "./RoomGallery/RoomGallery";
-import SectionBookingForm from "../../components/SectionBookingForm/SectionBookingForm";
+import AboutRoom from "../components/room-details/AboutRoom/AboutRoom"
+import RoomVideo from "../components/room-details/RoomVideo/RoomVideo";
+import RoomGallery from "../components/room-details/RoomGallery/RoomGallery";
+import SectionBookingForm from "../components/booking/SectionBookingForm";
 
 const RoomsInfo = () => {
   const [room, setRoom] = useState(null);

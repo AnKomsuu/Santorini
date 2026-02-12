@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import SectionBookingForm from "../../components/SectionBookingForm/SectionBookingForm";
+import SectionBookingForm from "../components/booking/SectionBookingForm";
 
 const ActivityDetailsPage = () => {
   const { activityId } = useParams();

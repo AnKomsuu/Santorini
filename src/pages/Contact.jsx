@@ -1,6 +1,6 @@
 import fon from "../assets/images/contactFon.png";
 import { FaLocationDot } from "react-icons/fa6";
-import SectionBookingForm from "../../components/SectionBookingForm/SectionBookingForm";
+import SectionBookingForm from "../components/booking/SectionBookingForm";
 import { FiPhone, FiMail } from "react-icons/fi";
 
 const Contact = () => {
