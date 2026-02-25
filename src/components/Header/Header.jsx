@@ -8,7 +8,7 @@ import { IoMdClose } from "react-icons/io";
 import { BsArrowUpRight } from "react-icons/bs";
 import santorini from "../../assets/santorini.svg";
 import mode from "../../assets/mode.svg";
-import vk from "../../assets/vk.svg";
+import vk from "../../assets/VK.svg";
 import youtube from "../../assets/YouTube.svg";
 import zen from "../../assets/zen.svg";
 import { FaPhoneAlt } from "react-icons/fa";
