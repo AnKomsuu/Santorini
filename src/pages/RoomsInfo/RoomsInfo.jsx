@@ -1,6 +1,6 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import AboutRoom from "./AboutRoom/AboutRoom";
 import RoomVideo from "./RoomVideo/RoomVideo";
@@ -38,9 +38,8 @@ const RoomsInfo = () => {
         } else {
           setError("Извините, комната с таким ID не найдена.");
         }
-      } catch (err) {
+      } catch {
         setError("Произошла ошибка при загрузке данных.");
-        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -77,6 +76,10 @@ const RoomsInfo = () => {
     <section>
       {room && (
         <>
+          <Helmet>
+            <title>{room.category} — Santorini Hotel</title>
+            <meta name="description" content={`Номер ${room.category} в отеле Santorini. ${room.features?.description?.slice(0, 120) || ""}`} />
+          </Helmet>
           <AboutRoom room={room} />
           {room.videoUrl && <RoomVideo videoUrl={room.videoUrl} />}
           {room.gallery && <RoomGallery gallery={room.gallery} />}
@@ -85,7 +88,7 @@ const RoomsInfo = () => {
       <div id="booking-form">
         <SectionBookingForm
           variant="full"
-          itemName={`Номер "${room.category}"`}
+          itemName={`Номер "${room?.category}"`}
         />
       </div>
     </section>

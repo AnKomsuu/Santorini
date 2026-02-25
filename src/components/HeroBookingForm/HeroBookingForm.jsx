@@ -33,89 +33,88 @@ const HeroBookingForm = () => {
     if (isCalendarOpen) setTimeout(() => setCalendarOpen(false), 50);
   });
   return (
-    <>
-      <div
-        id="booking"
-        ref={menuRef}
-        className="max-w-6xl w-full h-24 absolute bottom-25 left-1/2 -translate-x-1/2 rounded-lg 
-                   flex items-stretch shadow-lg"
-      >
-        <div className="relative flex-1 flex items-center gap-x-4 px-6">
-          <MdOutlineDateRange
-            onClick={resetRange}
-            className="text-3xl cursor-pointer"
-          />
-          <div
-            className="flex-grow cursor-pointer"
-            onClick={() => setCalendarOpen(!isCalendarOpen)}
-          >
-            <span className="uppercase font-medium">
-              {range.from && range.to
-                ? `${format(range.from, "dd MMM")} - ${format(
-                    range.to,
-                    "dd MMM"
-                  )}`
-                : "Дата заезда - Дата выезда"}
-            </span>
-          </div>
-          <MdOutlineKeyboardArrowDown
-            className="text-2xl cursor-pointer"
-            onClick={() => setCalendarOpen(!isCalendarOpen)}
-          />
-
-          {isCalendarOpen && (
-            <div className="absolute top-full mt-2 bg-theme-50 p-2 rounded-lg shadow-2xl left-0">
-              <DayPicker
-                className="z-40"
-                mode="range"
-                selected={range}
-                onSelect={setRange}
-                locale={ru}
-                numberOfMonths={1}
-              />
-            </div>
-          )}
+    <div
+      id="booking"
+      ref={menuRef}
+      className="max-w-6xl w-[calc(100%-2rem)] md:w-full mx-auto absolute bottom-4 md:bottom-25 left-1/2 -translate-x-1/2 rounded-lg
+                 flex flex-col md:flex-row items-stretch shadow-lg"
+    >
+      <div className="relative flex-1 flex items-center gap-x-2 md:gap-x-4 px-3 md:px-6 py-3 md:py-0 min-h-[48px] md:min-h-[96px]">
+        <MdOutlineDateRange
+          onClick={resetRange}
+          className="text-2xl md:text-3xl cursor-pointer flex-shrink-0"
+        />
+        <div
+          className="flex-grow cursor-pointer"
+          onClick={() => setCalendarOpen(!isCalendarOpen)}
+        >
+          <span className="uppercase font-medium text-xs md:text-base">
+            {range.from && range.to
+              ? `${format(range.from, "dd MMM")} - ${format(
+                  range.to,
+                  "dd MMM"
+                )}`
+              : "Дата заезда - Дата выезда"}
+          </span>
         </div>
+        <MdOutlineKeyboardArrowDown
+          className="text-xl md:text-2xl cursor-pointer flex-shrink-0"
+          onClick={() => setCalendarOpen(!isCalendarOpen)}
+        />
 
-        <div className="w-0.5 bg-theme-blue"></div>
+        {isCalendarOpen && (
+          <div className="absolute top-full mt-2 bg-theme-50 p-2 rounded-lg shadow-2xl left-0 z-50">
+            <DayPicker
+              className="z-40"
+              mode="range"
+              selected={range}
+              onSelect={setRange}
+              locale={ru}
+              numberOfMonths={1}
+            />
+          </div>
+        )}
+      </div>
 
-        <div className="flex-1 flex items-center justify-between px-6">
-          <div className="flex items-center gap-x-4">
-            <GoPeople className="text-3xl text-gray-400" />
-            <p className="uppercase font-medium">Кол-во человек</p>
-          </div>
-          <div className="flex items-center gap-x-3">
-            <button
-              onClick={countPlus}
-              className="bg-gray-100 cursor-pointer p-2 rounded-full text-gray-700 hover:bg-gray-300"
-            >
-              <GoPlus />
-            </button>
-            <p className="w-8 text-center font-bold text-lg">
-              {String(personCount).padStart(2, "0")}
-            </p>
-            <button
-              onClick={countMinus}
-              className="bg-gray-100 cursor-pointer p-2 rounded-full text-gray-700 hover:bg-gray-300"
-            >
-              <FiMinus />
-            </button>
-          </div>
+      <div className="hidden md:block w-0.5 bg-theme-blue"></div>
+      <div className="md:hidden h-px bg-theme-blue mx-3"></div>
+
+      <div className="flex-1 flex items-center justify-between px-3 md:px-6 py-3 md:py-0 min-h-[48px]">
+        <div className="flex items-center gap-x-2 md:gap-x-4">
+          <GoPeople className="text-2xl md:text-3xl text-gray-400 flex-shrink-0" />
+          <p className="uppercase font-medium text-xs md:text-base">Кол-во человек</p>
         </div>
-
-        <div className="w-0.5 bg-theme-blue"></div>
-
-        <div className="flex items-center justify-center px-6">
+        <div className="flex items-center gap-x-2 md:gap-x-3">
           <button
-            type="button"
-            onClick={onSearchOpen}
-            className="p-5 bg-bg-blue rounded-full text-white cursor-pointer hover:bg-blue-500"
+            onClick={countPlus}
+            className="bg-gray-100 cursor-pointer p-1.5 md:p-2 rounded-full text-gray-700 hover:bg-gray-300"
           >
-            <HiMagnifyingGlass className="text-3xl" />
+            <GoPlus />
+          </button>
+          <p className="w-8 text-center font-bold text-base md:text-lg">
+            {String(personCount).padStart(2, "0")}
+          </p>
+          <button
+            onClick={countMinus}
+            className="bg-gray-100 cursor-pointer p-1.5 md:p-2 rounded-full text-gray-700 hover:bg-gray-300"
+          >
+            <FiMinus />
           </button>
         </div>
       </div>
-    </>
+
+      <div className="hidden md:block w-0.5 bg-theme-blue"></div>
+
+      <div className="flex items-center justify-center px-3 md:px-6 py-3 md:py-0">
+        <button
+          type="button"
+          onClick={onSearchOpen}
+          className="p-3 md:p-5 bg-bg-blue rounded-full text-white cursor-pointer hover:bg-blue-500"
+        >
+          <HiMagnifyingGlass className="text-2xl md:text-3xl" />
+        </button>
+      </div>
+    </div>
   );
 };
 export default HeroBookingForm;

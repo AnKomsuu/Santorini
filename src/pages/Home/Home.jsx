@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Comfort from "./Comfort/Comfort";
 import Rooms from "./Rooms/Rooms";
 import Services from "./Services/Services";
@@ -24,6 +25,10 @@ const Home = () => {
   }, [location.state]);
   return (
     <>
+      <Helmet>
+        <title>Santorini Hotel — Отдых на берегу моря</title>
+        <meta name="description" content="Отель Santorini — идеальное место для отдыха на берегу моря. Комфортные номера, активный отдых, спа и ресторан." />
+      </Helmet>
       <Comfort />
       <Rooms />
       <Services />

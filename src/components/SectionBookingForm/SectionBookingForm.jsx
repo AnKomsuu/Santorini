@@ -132,31 +132,30 @@ const SectionBookingForm = ({
     const updatedBookings = [...allBookings, bookingData];
     localStorage.setItem("bookings", JSON.stringify(updatedBookings));
 
-    console.log("Отправка данных:", bookingData);
     alert("Спасибо! Ваша заявка принята.");
     navigate("/");
   };
 
   return (
     <section>
-      <h2 className="text-5xl uppercase text-center leading-17 mb-15">
+      <h2 className="text-2xl md:text-5xl uppercase text-center leading-tight md:leading-17 mb-8 md:mb-15 px-4">
         {title
           ? title
           : variant === "full"
           ? "Забронируйте этот номер"
           : "Оставить заявку"}
       </h2>
-      <div className="w-145 bg-[#FF8139] mx-auto pt-17.5 px-9 pb-8 relative">
+      <div className="w-full max-w-xl lg:max-w-[580px] bg-[#FF8139] mx-auto pt-8 md:pt-17.5 px-4 md:px-9 pb-6 md:pb-8 relative">
         <form
           onSubmit={handleSubmit}
-          className="grid grid-cols-2 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-10"
           noValidate
         >
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <div className="bg-white flex items-center text-black gap-x-2.5 px-4">
-              <FiUser className="text-xl" />
+              <FiUser className="text-xl flex-shrink-0" />
               <input
-                className="w-full h-10 outline-none"
+                className="w-full h-10 outline-none text-sm md:text-base"
                 required
                 placeholder="Ваше имя"
                 type="text"
@@ -171,22 +170,22 @@ const SectionBookingForm = ({
           </div>
           {variant === "full" && (
             <>
-              <div className="col-span-1">
+              <div>
                 <div className="bg-white px-4 text-black flex items-center gap-x-2.5">
-                  <FiCalendar />
+                  <FiCalendar className="flex-shrink-0" />
                   <input
-                    className="w-full outline-none h-10"
+                    className="w-full outline-none h-10 text-sm md:text-base"
                     type="date"
                     value={checkIn}
                     onChange={(e) => setCheckIn(e.target.value)}
                   />
                 </div>
               </div>
-              <div className="col-span-1">
+              <div>
                 <div className="bg-white px-4 flex text-black items-center gap-x-2.5">
-                  <FiCalendar />
+                  <FiCalendar className="flex-shrink-0" />
                   <input
-                    className="w-full outline-none h-10"
+                    className="w-full outline-none h-10 text-sm md:text-base"
                     type="date"
                     value={checkOut}
                     onChange={(e) => setCheckOut(e.target.value)}
@@ -194,15 +193,15 @@ const SectionBookingForm = ({
                 </div>
               </div>
               {dateError && (
-                <p className="col-span-2 text-white text-sm -mt-4 ml-2">
+                <p className="md:col-span-2 text-white text-sm -mt-2 md:-mt-4 ml-2">
                   {dateError}
                 </p>
               )}
 
-              <div className="col-span-1 bg-white px-4 flex text-black items-center gap-x-2.5">
-                <FiUsers />
+              <div className="bg-white px-4 flex text-black items-center gap-x-2.5">
+                <FiUsers className="flex-shrink-0" />
                 <select
-                  className="w-full outline-none h-10"
+                  className="w-full outline-none h-10 text-sm md:text-base"
                   value={adults}
                   onChange={(e) => setAdults(e.target.value)}
                   disabled={isAuth}
@@ -214,10 +213,10 @@ const SectionBookingForm = ({
                   <option value="5">5 Взрослых</option>
                 </select>
               </div>
-              <div className="col-span-1 bg-white px-4 flex text-black items-center gap-x-2.5">
-                <FiUsers />
+              <div className="bg-white px-4 flex text-black items-center gap-x-2.5">
+                <FiUsers className="flex-shrink-0" />
                 <select
-                  className="w-full outline-none h-10"
+                  className="w-full outline-none h-10 text-sm md:text-base"
                   value={children}
                   onChange={(e) => setChildren(e.target.value)}
                 >
@@ -231,11 +230,11 @@ const SectionBookingForm = ({
               </div>
             </>
           )}
-          <div className="col-span-2">
+          <div className="md:col-span-2">
             <div className="h-10 bg-white flex items-center text-black px-4 gap-x-3">
-              <FiPhone className="text-xl" />
+              <FiPhone className="text-xl flex-shrink-0" />
               <InputMask
-                mask="+\9\96 (999) 999-999"
+                mask="+996 (999) 999-999"
                 maskChar="_"
                 alwaysShowMask={false}
                 value={phone}
@@ -248,7 +247,7 @@ const SectionBookingForm = ({
                     type="tel"
                     required
                     placeholder="Ваш номер телефона"
-                    className="w-full h-full outline-none"
+                    className="w-full h-full outline-none text-sm md:text-base"
                     disabled={isAuth}
                   />
                 )}
@@ -260,10 +259,10 @@ const SectionBookingForm = ({
           </div>
           {showRoomType && (
             <>
-              <div className="col-span-2 bg-white text-black rounded-md px-3 pb-3">
+              <div className="md:col-span-2 bg-white text-black rounded-md px-3 pb-3">
                 <label className="text-xs">Выберите тип номера</label>
                 <select
-                  className="w-full outline-none"
+                  className="w-full outline-none text-sm md:text-base"
                   value={roomType}
                   onChange={(e) => setRoomType(e.target.value)}
                 >
@@ -276,45 +275,43 @@ const SectionBookingForm = ({
               </div>
               <Link
                 to="/"
-                className="absolute right-10 top-5 text-white underline hover:text-bg-blue"
+                className="absolute right-4 md:right-10 top-3 md:top-5 text-white underline hover:text-bg-blue text-sm md:text-base"
               >
                 Вернуться на главную
               </Link>
             </>
           )}
           {showComment && (
-            <>
-              <div className="col-span-2 flex gap-x-2.5 h-25 bg-white text-black rounded-md px-3 pb-3 pt-1">
-                <FaRegCommentAlt className="mt-1 mx-1" />
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="Ваше сообщение (минимум 10 символов)"
-                  required
-                  className="w-full outline-none resize-none"
-                ></textarea>
-              </div>
-            </>
+            <div className="md:col-span-2 flex gap-x-2.5 h-20 md:h-25 bg-white text-black rounded-md px-3 pb-3 pt-1">
+              <FaRegCommentAlt className="mt-1 mx-1 flex-shrink-0" />
+              <textarea
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Ваше сообщение (минимум 10 символов)"
+                required
+                className="w-full outline-none resize-none text-sm md:text-base"
+              ></textarea>
+            </div>
           )}
 
-          <div className="col-span-2 text-center">
+          <div className="md:col-span-2 text-center">
             {isAuth ? (
               <button
                 type="submit"
-                className="text-white text-xl uppercase font-medium cursor-pointer bg-bg-blue w-full py-4"
+                className="text-white text-base md:text-xl uppercase font-medium cursor-pointer bg-bg-blue w-full py-3 md:py-4"
               >
                 {buttonText}
               </button>
             ) : (
               <Link
                 to="/login"
-                className="text-white text-xl uppercase font-medium cursor-pointer bg-bg-blue px-10 py-4"
+                className="text-white text-base md:text-xl uppercase font-medium cursor-pointer bg-bg-blue inline-block px-6 md:px-10 py-3 md:py-4"
               >
                 Войти в аккаунт
               </Link>
             )}
           </div>
-          <div className="col-span-2 text-white">
+          <div className="md:col-span-2 text-white text-xs md:text-base">
             <input
               type="checkbox"
               id="agreement"
@@ -325,7 +322,8 @@ const SectionBookingForm = ({
             Нажимая на кнопку, вы автоматически соглашаетесь с
             <a
               className="underline ml-1"
-              target="https://secrets.tbank.ru/glossarij/chto-takoe-politika-konfidencialnosti/"
+              target="_blank"
+              rel="noreferrer"
               href="https://secrets.tbank.ru/glossarij/chto-takoe-politika-konfidencialnosti/"
             >
               Политикой конфиденциальности

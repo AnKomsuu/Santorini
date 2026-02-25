@@ -20,7 +20,6 @@ export const ThemeProvider = ({ children }) => {
 
     localStorage.setItem("theme", theme);
 
-    console.log(`Установлен класс: ${theme}`);
   }, [theme]);
 
   return (
@@ -30,4 +29,5 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext);

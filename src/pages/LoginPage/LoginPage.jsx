@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { useAuth } from "../../context/AuthContext";
 
@@ -13,21 +14,29 @@ const LoginPage = () => {
     setEye(!eye);
   };
   const { login } = useAuth();
-  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setError("");
 
-    const result = await login(email, password);
+    if (!email.trim() || !password) {
+      setError("Пожалуйста, заполните все поля.");
+      return;
+    }
 
-    if (!result.success) {
+    const result = login(email, password);
+
+    if (result && !result.success) {
       setError(result.message);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-theme-50 ">
+    <div className="flex items-center justify-center min-h-screen bg-theme-50">
+      <Helmet>
+        <title>Вход — Santorini Hotel</title>
+        <meta name="description" content="Войдите в личный кабинет отеля Santorini для управления бронированиями." />
+      </Helmet>
       <div className="w-full max-w-md p-8 space-y-8 bg-orange-400 text-white rounded-xl shadow-lg">
         <div className="text-center">
           <h2 className="text-4xl font-serif italic">Вход в Santorini</h2>
@@ -73,6 +82,7 @@ const LoginPage = () => {
                 type="button"
                 onClick={showPassword}
                 className="absolute right-5 bottom-3.5 text-black"
+                aria-label={eye ? "Скрыть пароль" : "Показать пароль"}
               >
                 {eye ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
               </button>
@@ -94,7 +104,7 @@ const LoginPage = () => {
           Еще нет аккаунта?
           <Link
             to="/register"
-            className="font-medium ml-4 text-lg hover:text-bg-blue hover:text-dark-blue"
+            className="font-medium ml-4 text-lg hover:text-bg-blue"
           >
             Зарегистрироваться
           </Link>

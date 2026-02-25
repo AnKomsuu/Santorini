@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import InputMask from "react-input-mask";
@@ -32,7 +33,6 @@ const RegisterPage = () => {
       if (errors.name) {
         setErrors((prev) => ({ ...prev, name: undefined }));
       }
-    } else {
     }
   };
 
@@ -42,7 +42,7 @@ const RegisterPage = () => {
       setErrors((prev) => ({ ...prev, phone: undefined }));
     }
   };
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     const newErrors = {};
@@ -62,15 +62,15 @@ const RegisterPage = () => {
       newErrors.email = "Введите корректный email-адрес.";
     }
 
-    const phoneRegex =
-      /^\+996(?:22[0-9]|50[0-9]|55[0-9]|70[0-9]|755|77[0-9]|99[0-9])\d{6}$/;
-
     const cleanPhone = phone.replace(/[\s()-]/g, "");
-    if (!phoneRegex.test(cleanPhone)) {
-      newErrors.phone = "Неверный код оператора (KG).";
-    }
     if (!phone.trim() || phone.includes("_")) {
       newErrors.phone = "Пожалуйста, введите ваш номер телефона.";
+    } else {
+      const phoneRegex =
+        /^\+996(?:22[0-9]|50[0-9]|55[0-9]|70[0-9]|755|77[0-9]|99[0-9])\d{6}$/;
+      if (!phoneRegex.test(cleanPhone)) {
+        newErrors.phone = "Неверный код оператора (KG).";
+      }
     }
 
     if (!password) {
@@ -100,15 +100,19 @@ const RegisterPage = () => {
     setErrors({});
     const userData = { name, email, phone, password };
 
-    const result = await register(userData);
+    const result = register(userData);
 
-    if (!result.success) {
+    if (result && !result.success) {
       setErrors({ general: result.message });
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-theme-img">
+      <Helmet>
+        <title>Регистрация — Santorini Hotel</title>
+        <meta name="description" content="Создайте аккаунт в отеле Santorini для бронирования номеров." />
+      </Helmet>
       <div className="w-full max-w-md p-8 space-y-6 text-white bg-orange-400 rounded-xl">
         <h2 className="text-4xl font-serif text-center italic">
           Создать аккаунт
@@ -121,7 +125,7 @@ const RegisterPage = () => {
           className="space-y-4"
         >
           <div>
-            <label className="">Ваше имя</label>
+            <label>Ваше имя</label>
             <input
               type="text"
               value={name}
@@ -149,7 +153,7 @@ const RegisterPage = () => {
           <div>
             <label>Телефон</label>
             <InputMask
-              mask="+\9\96 (999) 999-999"
+              mask="+996 (999) 999-999"
               value={phone}
               onChange={handlePhoneChange}
             >
@@ -182,6 +186,7 @@ const RegisterPage = () => {
                 type="button"
                 onClick={showPassword}
                 className="absolute right-5 bottom-1.5 text-black"
+                aria-label={eye ? "Скрыть пароль" : "Показать пароль"}
               >
                 {eye ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
               </button>
@@ -206,6 +211,7 @@ const RegisterPage = () => {
                 type="button"
                 onClick={showPassword2}
                 className="absolute right-5 bottom-1.5 text-black"
+                aria-label={eye2 ? "Скрыть пароль" : "Показать пароль"}
               >
                 {eye2 ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
               </button>

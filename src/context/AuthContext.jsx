@@ -27,10 +27,14 @@ export const AuthProvider = ({ children }) => {
 
         const storedUser = localStorage.getItem("user");
         if (storedUser) {
-          setUser(JSON.parse(storedUser));
+          try {
+            setUser(JSON.parse(storedUser));
+          } catch {
+            localStorage.removeItem("user");
+          }
         }
-      } catch (error) {
-        console.error("Ошибка инициализации:", error);
+      } catch {
+        // Auth initialization failed silently
       } finally {
         setLoading(false);
       }
@@ -46,7 +50,7 @@ export const AuthProvider = ({ children }) => {
     );
 
     if (foundUser) {
-      const { password, ...userToSave } = foundUser;
+      const { password: _password, ...userToSave } = foundUser;
       setUser(userToSave);
       localStorage.setItem("user", JSON.stringify(userToSave));
       alert(`Добро пожаловать, ${userToSave.name}!`);
@@ -94,4 +98,5 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => useContext(AuthContext);

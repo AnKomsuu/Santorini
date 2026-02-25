@@ -15,6 +15,12 @@
     @apply max-w-[1400px] mx-auto px-4;
   }
 }
+
+html,
+body {
+  overflow-x: hidden;
+}
+
 html.dark {
   --color-theme-50: #242527;
   --color-theme-login: #e0e0e0;
@@ -75,11 +81,6 @@ html.dark #booking {
   color: #d1d5db;
 }
 
-@layer components {
-  .container {
-    @apply max-w-[1400px] mx-auto px-4;
-  }
-}
 input[type="password"]::-ms-reveal {
   display: none;
 }

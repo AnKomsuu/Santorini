@@ -17,9 +17,8 @@ const Rooms = () => {
       try {
         const response = await axios.get("/db.json");
         setRooms(response.data.rooms.slice(0, 5));
-      } catch (err) {
+      } catch {
         setError("Не удалось загрузить популярные номера.");
-        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -44,17 +43,22 @@ const Rooms = () => {
   }
 
   return (
-    <section className="py-20 overflow-hidden mx-auto w-377">
-      <div className="relative -z-10 flex justify-center items-center flex-col mb-12 h-55">
-        <img className="absolute" src={decore} alt="" />
-        <h2 className="text-5xl uppercase mb-6">Номера</h2>
-        <p className="font-medium text-3xl">Выбери свой номер</p>
+    <section className="py-10 md:py-20 overflow-hidden mx-auto w-full max-w-[1508px]">
+      <div className="relative -z-10 flex justify-center items-center flex-col mb-8 md:mb-12 h-32 md:h-55">
+        <img className="absolute hidden md:block" src={decore} alt="" />
+        <h2 className="text-3xl md:text-5xl uppercase mb-4 md:mb-6">Номера</h2>
+        <p className="font-medium text-xl md:text-3xl">Выбери свой номер</p>
       </div>
-      <div className="relative">
+      <div className="relative px-4 md:px-0">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={30}
-          slidesPerView={3}
+          spaceBetween={20}
+          slidesPerView={1}
+          breakpoints={{
+            640: { slidesPerView: 1.5, spaceBetween: 20 },
+            768: { slidesPerView: 2, spaceBetween: 25 },
+            1024: { slidesPerView: 3, spaceBetween: 30 },
+          }}
           navigation={{
             nextEl: ".swiper-button-next-custom",
             prevEl: ".swiper-button-prev-custom",
@@ -69,11 +73,11 @@ const Rooms = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="swiper-button-prev-custom absolute top-1/2 left-[30%] -translate-y-1/2 z-10 bg-orange-500 text-white p-5 rounded-full cursor-pointer hover:bg-orange-600">
-          <IoArrowBackSharp className="text-4xl" />
+        <div className="swiper-button-prev-custom absolute top-1/2 left-2 md:left-[30%] -translate-y-1/2 z-10 bg-orange-500 text-white p-3 md:p-5 rounded-full cursor-pointer hover:bg-orange-600">
+          <IoArrowBackSharp className="text-2xl md:text-4xl" />
         </div>
-        <div className="swiper-button-next-custom absolute top-1/2 right-[30%] -translate-y-1/2 z-10 bg-orange-500 text-white p-5 rounded-full cursor-pointer hover:bg-orange-600">
-          <IoArrowForwardSharp className="text-4xl" />
+        <div className="swiper-button-next-custom absolute top-1/2 right-2 md:right-[30%] -translate-y-1/2 z-10 bg-orange-500 text-white p-3 md:p-5 rounded-full cursor-pointer hover:bg-orange-600">
+          <IoArrowForwardSharp className="text-2xl md:text-4xl" />
         </div>
       </div>
     </section>

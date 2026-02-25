@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import axios from "axios";
@@ -7,8 +7,6 @@ import axios from "axios";
 const SearchPanel = ({ isOpen, onClose }) => {
   const [query, setQuery] = useState("");
   const inputRef = useRef(null);
-  const navigate = useNavigate();
-
   const [allSearchableData, setAllSearchableData] = useState([]);
   const [results, setResults] = useState([]);
   const [error, setError] = useState("");
@@ -20,7 +18,6 @@ const SearchPanel = ({ isOpen, onClose }) => {
         const rooms = response.data.rooms.map((item) => ({
           type: "Номер",
           name: item.category,
-
           searchableText:
             `${item.category} ${item.description} ${item.view}`.toLowerCase(),
           path: `/rooms/${item.id}`,
@@ -68,7 +65,7 @@ const SearchPanel = ({ isOpen, onClose }) => {
           ...staticPages,
         ]);
       })
-      .catch((err) => console.error("Ошибка загрузки данных для поиска:", err));
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -110,27 +107,27 @@ const SearchPanel = ({ isOpen, onClose }) => {
       aria-modal="true"
     >
       <div className="container py-4">
-        <div className="flex items-center gap-x-4 border-b pb-4">
-          <FiSearch className="text-2xl" />
+        <div className="flex items-center gap-x-3 md:gap-x-4 border-b pb-4">
+          <FiSearch className="text-xl md:text-2xl flex-shrink-0" />
           <input
             ref={inputRef}
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Поиск по сайту (RU)"
-            className="w-full h-12 text-lg outline-none"
+            className="w-full h-10 md:h-12 text-base md:text-lg outline-none"
           />
           <button
             type="button"
             onClick={onClose}
-            className="text-3xl cursor-pointer"
+            className="text-2xl md:text-3xl cursor-pointer p-2"
             aria-label="Закрыть поиск"
           >
             <IoMdClose />
           </button>
         </div>
 
-        <div className="pt-4 max-h-40 overflow-y-auto">
+        <div className="pt-4 max-h-60 md:max-h-40 overflow-y-auto">
           {results.length > 0 && (
             <div className="space-y-1">
               {results.map((item) => (
@@ -138,7 +135,7 @@ const SearchPanel = ({ isOpen, onClose }) => {
                   key={`${item.type}-${item.name}`}
                   to={item.path}
                   onClick={onClose}
-                  className="block p-3 rounded-md hover:bg-theme-img"
+                  className="block p-3 rounded-md hover:bg-theme-img text-sm md:text-base"
                 >
                   {item.name}
                   <span className="text-xs ml-2">({item.type})</span>
@@ -147,7 +144,7 @@ const SearchPanel = ({ isOpen, onClose }) => {
             </div>
           )}
 
-          {error && <p className="p-3 italic">{error}</p>}
+          {error && <p className="p-3 italic text-sm md:text-base">{error}</p>}
         </div>
       </div>
     </div>

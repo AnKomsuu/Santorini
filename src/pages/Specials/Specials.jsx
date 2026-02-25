@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import axios from "axios";
 import BookingForm from "../../components/SectionBookingForm/SectionBookingForm";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -21,9 +22,8 @@ const SpecialsPage = () => {
         } else {
           setError("Раздел 'specials' не найден в db.json");
         }
-      } catch (err) {
+      } catch {
         setError("Не удалось загрузить данные.");
-        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -41,10 +41,14 @@ const SpecialsPage = () => {
 
   return (
     <section className="container">
-      <div className="relative">
+      <Helmet>
+        <title>Спецпредложения — Santorini Hotel</title>
+        <meta name="description" content="Специальные предложения и акции отеля Santorini — выгодные условия для вашего отдыха." />
+      </Helmet>
+      <div className="relative pb-16 md:pb-20">
         <Swiper
           modules={[Navigation]}
-          spaceBetween={50}
+          spaceBetween={30}
           slidesPerView={1}
           navigation={{
             nextEl: ".swiper-button-next-custom",
@@ -58,26 +62,26 @@ const SpecialsPage = () => {
                 <img
                   src={special.image}
                   alt={special.title}
-                  className="w-full h-[400px] object-cover mb-10 rounded-b-2xl"
+                  className="w-full h-48 sm:h-72 md:h-[400px] object-cover mb-6 md:mb-10 rounded-b-2xl"
                 />
-                <div className="grid grid-cols-2 gap-16">
-                  <div className="">
-                    <h2 className="text-4xl font-serif mb-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                  <div>
+                    <h2 className="text-2xl md:text-4xl font-serif mb-3 md:mb-4">
                       {special.title}
                     </h2>
-                    <p className="text-bg-blue text-xl">
+                    <p className="text-bg-blue text-base md:text-xl">
                       Предложение действительно до {special.date}
                     </p>
-                    <p className="text-sm mb-6">{special.validUntil}</p>
-                    <p className="text-lg leading-relaxed mb-8">
+                    <p className="text-sm mb-4 md:mb-6">{special.validUntil}</p>
+                    <p className="text-base md:text-lg leading-relaxed mb-4 md:mb-8">
                       {special.description}
                     </p>
-                    <h3 className="text-2xl font-bold mb-4">
+                    <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4">
                       {special.conditionsTitle}
                     </h3>
-                    <p className="">{special.conditionsText}</p>
+                    <p className="text-sm md:text-base">{special.conditionsText}</p>
                   </div>
-                  <div className="">
+                  <div>
                     <BookingForm
                       variant="simple"
                       title="Примите участие в акции"
@@ -91,11 +95,11 @@ const SpecialsPage = () => {
           ))}
         </Swiper>
 
-        <div className="swiper-button-prev-custom absolute bottom-[-10%] left-[40%]  z-10 bg-orange-500 text-white p-3 rounded-full cursor-pointer hover:bg-orange-600">
-          <IoArrowBack className="text-3xl" />
+        <div className="swiper-button-prev-custom absolute bottom-0 left-1/3 md:left-[40%] z-10 bg-orange-500 text-white p-2 md:p-3 rounded-full cursor-pointer hover:bg-orange-600">
+          <IoArrowBack className="text-xl md:text-3xl" />
         </div>
-        <div className="swiper-button-next-custom absolute bottom-[-10%] right-[40%] z-10 bg-orange-500 text-white p-3 rounded-full cursor-pointer hover:bg-orange-600">
-          <IoArrowForward className="text-3xl" />
+        <div className="swiper-button-next-custom absolute bottom-0 right-1/3 md:right-[40%] z-10 bg-orange-500 text-white p-2 md:p-3 rounded-full cursor-pointer hover:bg-orange-600">
+          <IoArrowForward className="text-xl md:text-3xl" />
         </div>
       </div>
     </section>
