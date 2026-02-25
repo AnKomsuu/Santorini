@@ -79,7 +79,8 @@ const ActivityDetailsPage = () => {
                 activity.id > 8 ? "md:w-full" : ""
               }`}
               src={activity.image}
-              alt=""
+              alt={activity.title}
+              loading="lazy"
             />
             <h2 className="uppercase text-2xl md:text-4xl md:ml-10 col-span-full">
               ЧТО ВАС ЖДЕТ
@@ -87,7 +88,8 @@ const ActivityDetailsPage = () => {
             <img
               className="h-48 sm:h-80 md:h-145.5 w-full object-cover rounded-tr-[50px] md:rounded-tr-[100px]"
               src={activity.activityImage}
-              alt=""
+              alt={`${activity.title} — что вас ждет`}
+              loading="lazy"
             />
             <div className="md:ml-20 mb-12 md:mb-35">
               {activity.highlights.map((highlight, index) => (
@@ -110,7 +112,8 @@ const ActivityDetailsPage = () => {
                 <img
                   className="w-14 h-14 md:w-20 md:h-20 rounded-full object-cover"
                   src={item.img}
-                  alt=""
+                  alt={item.text}
+                  loading="lazy"
                 />
                 <p className="text-sm md:text-xl w-28 md:w-40 text-center">{item.text}</p>
               </div>

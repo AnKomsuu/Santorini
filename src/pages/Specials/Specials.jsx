@@ -62,6 +62,7 @@ const SpecialsPage = () => {
                 <img
                   src={special.image}
                   alt={special.title}
+                  loading="lazy"
                   className="w-full h-48 sm:h-72 md:h-[400px] object-cover mb-6 md:mb-10 rounded-b-2xl"
                 />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">

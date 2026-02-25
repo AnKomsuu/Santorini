@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
-import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
+
+const YMaps = lazy(() => import("@pbe/react-yandex-maps").then(m => ({ default: m.YMaps })));
+const YMap = lazy(() => import("@pbe/react-yandex-maps").then(m => ({ default: m.Map })));
+const Placemark = lazy(() => import("@pbe/react-yandex-maps").then(m => ({ default: m.Placemark })));
 
 import fon from "../../assets/attractionsFon.jpg";
 
@@ -61,6 +64,7 @@ const AttractionsPage = () => {
                   <img
                     src={place.image}
                     alt={place.title}
+                    loading="lazy"
                     className="w-full h-24 md:h-32 object-cover rounded-md mb-2 md:mb-3"
                   />
                   <h3 className="font-bold text-sm md:text-base">{place.title}</h3>
@@ -70,29 +74,31 @@ const AttractionsPage = () => {
             </div>
 
             <div className="md:col-span-2 h-64 md:h-[500px] rounded-lg overflow-hidden order-1 md:order-2">
-              <YMaps>
-                <Map
-                  defaultState={{ center: [44.45, 34.09], zoom: 10 }}
-                  width="100%"
-                  height="100%"
-                >
-                  {attractions.map((place) => (
-                    <Placemark
-                      key={place.id}
-                      geometry={place.coordinates}
-                      properties={{
-                        balloonContent: `<strong>${place.title}</strong>`,
-                      }}
-                      options={{
-                        preset:
-                          hoveredPlaceId === place.id
-                            ? "islands#redIcon"
-                            : "islands#blueIcon",
-                      }}
-                    />
-                  ))}
-                </Map>
-              </YMaps>
+              <Suspense fallback={<div className="w-full h-full bg-gray-100 animate-pulse flex items-center justify-center">Загрузка карты...</div>}>
+                <YMaps>
+                  <YMap
+                    defaultState={{ center: [44.45, 34.09], zoom: 10 }}
+                    width="100%"
+                    height="100%"
+                  >
+                    {attractions.map((place) => (
+                      <Placemark
+                        key={place.id}
+                        geometry={place.coordinates}
+                        properties={{
+                          balloonContent: `<strong>${place.title}</strong>`,
+                        }}
+                        options={{
+                          preset:
+                            hoveredPlaceId === place.id
+                              ? "islands#redIcon"
+                              : "islands#blueIcon",
+                        }}
+                      />
+                    ))}
+                  </YMap>
+                </YMaps>
+              </Suspense>
             </div>
           </div>
         </div>

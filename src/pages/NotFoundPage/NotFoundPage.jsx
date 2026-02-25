@@ -10,7 +10,7 @@ const NotFoundPage = () => {
         <title>Страница не найдена — Santorini Hotel</title>
       </Helmet>
       <div className="relative mb-12 md:mb-30">
-        <img className="rounded-b-2xl w-full" src={fon} alt="" />
+        <img className="rounded-b-2xl w-full" src={fon} alt="Страница не найдена" />
         <p
           className="absolute bottom-[-30px] md:bottom-[-60px] text-left text-xl md:text-4xl uppercase
                                 pt-4 md:pt-9 px-6 md:px-15 bg-theme-img rounded-tr-[25px] md:rounded-tr-[40px] font-serif leading-snug"

@@ -7,6 +7,7 @@ const RoomCard = ({ room }) => {
       <img
         src={room.image}
         alt={room.category}
+        loading="lazy"
         className="w-full h-48 sm:h-64 md:h-80 lg:h-100 object-cover rounded-t-[60px] md:rounded-t-[100px]"
       />
       <div className="mt-4">

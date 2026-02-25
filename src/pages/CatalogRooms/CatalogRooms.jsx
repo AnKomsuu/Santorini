@@ -60,7 +60,7 @@ const CatalogRooms = () => {
                 key={`decor-${room.id}`}
                 className="col-span-1 md:col-span-2 hidden md:flex justify-center my-[-2rem]"
               >
-                <img src={decore2} alt="decoration" />
+                <img src={decore2} alt="" loading="lazy" />
               </div>
             );
           }

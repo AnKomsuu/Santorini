@@ -72,6 +72,7 @@ const Reviews = () => {
               <img
                 src={review.avatar}
                 alt={review.author}
+                loading="lazy"
                 className="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover"
               />
               <div>

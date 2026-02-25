@@ -99,6 +99,7 @@ const PastaBarPage = () => {
             <img
               src={pasta1}
               alt="Интерьер паста-бара"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
@@ -106,6 +107,7 @@ const PastaBarPage = () => {
             <img
               src={pasta2}
               alt="Готовое блюдо пасты"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
@@ -113,6 +115,7 @@ const PastaBarPage = () => {
             <img
               src={pasta3}
               alt="Процесс приготовления пасты"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>
@@ -120,6 +123,7 @@ const PastaBarPage = () => {
             <img
               src={pasta4}
               alt="Гости в паста-баре"
+              loading="lazy"
               className="w-full h-full object-cover"
             />
           </div>

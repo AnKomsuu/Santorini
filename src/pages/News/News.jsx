@@ -67,6 +67,7 @@ const News = () => {
             className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-25 items-center"
           >
             <img
+              loading="lazy"
               className={`w-full h-48 sm:h-64 md:h-92 object-cover rounded-lg ${
                 index % 2 !== 0
                   ? "md:order-last md:rounded-tl-[70px]"

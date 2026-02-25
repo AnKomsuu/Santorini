@@ -72,6 +72,7 @@ const Adventure = ({ activeCategory, setActiveCategory }) => {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                   className="w-full h-40 sm:h-60 md:h-90 transition-transform object-cover duration-400 group-hover:scale-110"
                 />
                 <Link

@@ -52,7 +52,7 @@ const RecreationPage = () => {
         <meta name="description" content="Активный отдых в отеле Santorini — морские прогулки, рыбалка, экстрим и многое другое." />
       </Helmet>
       <div className="relative mb-16 md:mb-37.5">
-        <img className="rounded-b-2xl w-full" src={fon} alt="" />
+        <img className="rounded-b-2xl w-full" src={fon} alt="Активный отдых" />
         <p
           className="absolute bottom-0 left-1/2 -translate-x-1/2 md:translate-x-0 md:left-[24%] text-2xl md:text-5xl uppercase
                           pt-4 md:pt-9 px-8 md:px-25 bg-theme-img rounded-t-[30px] md:rounded-t-[50px] font-serif text-center md:text-left whitespace-nowrap"
@@ -84,6 +84,7 @@ const RecreationPage = () => {
               <img
                 src={activity.image}
                 alt={activity.title}
+                loading="lazy"
                 className="w-full cursor-pointer h-40 sm:h-60 md:h-90 object-cover duration-400 group-hover:scale-110"
               />
               <Link

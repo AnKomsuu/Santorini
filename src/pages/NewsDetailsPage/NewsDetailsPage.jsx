@@ -60,6 +60,7 @@ const NewsDetailsPage = () => {
               <img
                 src={block.src}
                 alt={block.caption || ""}
+                loading="lazy"
                 className="w-full object-cover rounded-lg shadow-md h-48 md:h-100"
               />
               {block.caption && (
@@ -131,7 +132,7 @@ const NewsDetailsPage = () => {
             <div className="flex gap-x-5 md:gap-x-7">
               <FaWhatsapp className="w-8 md:w-12 h-auto text-green-600" />
               <FaTelegram className="w-7 md:w-10 h-auto text-blue-600" />
-              <img className="w-7 md:w-10 h-auto" src={vk} alt="" />
+              <img className="w-7 md:w-10 h-auto" src={vk} alt="VK" loading="lazy" />
             </div>
           </div>
 

@@ -88,6 +88,7 @@ const AboutHotel = () => {
             <img
               src={beach}
               alt="Уголок отеля"
+              loading="lazy"
               className="rounded-2xl shadow-xl w-full"
             />
           </div>
@@ -154,6 +155,7 @@ const AboutHotel = () => {
                 <img
                   src={member.image}
                   alt={member.name}
+                  loading="lazy"
                   className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover mb-4"
                 />
                 <p className="text-lg md:text-xl font-bold">{member.name}</p>

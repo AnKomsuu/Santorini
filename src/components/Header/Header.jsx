@@ -152,21 +152,21 @@ const Header = ({ isSearchOpen, onSearchClose }) => {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img className="w-8" src={vk} alt="" />
+                    <img className="w-8" src={vk} alt="VK" />
                   </a>
                   <a
                     href="https://youtu.be/j-iheFkstFQ"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img className="w-9" src={youtube} alt="" />
+                    <img className="w-9" src={youtube} alt="YouTube" />
                   </a>
                   <a
                     href="https://dzen.ru/video/watch/686676736777d3671a5c2813?sid=544742401204260607"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <img className="w-8" src={zen} alt="" />
+                    <img className="w-8" src={zen} alt="Дзен" />
                   </a>
                 </div>
               </div>

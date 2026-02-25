@@ -102,6 +102,7 @@ const Services = () => {
           <img
             src={servicesData[activeIndex].image}
             alt={servicesData[activeIndex].title}
+            loading="lazy"
             className="rounded-tl-[60px] md:rounded-tl-[100px] w-full md:w-140 h-64 sm:h-80 md:h-120 lg:h-150 object-cover"
           />
         </div>

@@ -46,7 +46,8 @@ const Offers = () => {
             <img
               className="w-full md:w-160 h-48 sm:h-64 md:h-80 object-cover rounded-lg md:rounded-none"
               src={item.image}
-              alt=""
+              alt={item.title}
+              loading="lazy"
             />
             <div className="md:w-125">
               <p className="text-base md:text-lg">12/06.22</p>

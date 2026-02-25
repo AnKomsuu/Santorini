@@ -8,17 +8,20 @@ const RoomGallery = ({ gallery }) => {
         <img
           className="sm:col-span-1 md:col-span-3 rounded-t-[40px] md:rounded-t-[80px] w-full object-cover h-48 md:h-auto"
           src={gallery[0]}
-          alt=""
+          alt="Фото номера 1"
+          loading="lazy"
         />
         <img
           className="sm:col-span-1 md:col-span-2 rounded-t-[40px] md:rounded-t-[80px] w-full object-cover h-48 md:h-auto"
           src={gallery[1]}
-          alt=""
+          alt="Фото номера 2"
+          loading="lazy"
         />
         <img
           className="sm:col-span-1 md:col-span-3 rounded-t-[40px] md:rounded-t-[80px] w-full object-cover h-48 md:h-auto"
           src={gallery[2]}
-          alt=""
+          alt="Фото номера 3"
+          loading="lazy"
         />
         <img
           className="bottom-[-15%] left-[47%] absolute hidden md:block"

@@ -67,6 +67,7 @@ const Services = () => {
               <img
                 src={grace}
                 alt="Ресторан"
+                loading="lazy"
                 className="rounded-2xl shadow-lg h-48 sm:h-72 md:h-100 w-full object-cover"
               />
             </div>
@@ -84,6 +85,7 @@ const Services = () => {
               <img
                 src={pubPool}
                 alt="Бар у бассейна"
+                loading="lazy"
                 className="rounded-2xl shadow-lg h-48 sm:h-72 md:h-100 w-full object-cover"
               />
             </div>
@@ -104,6 +106,7 @@ const Services = () => {
             <img
               src={pool}
               alt="Пляж отеля"
+              loading="lazy"
               className="rounded-2xl shadow-lg h-64 sm:h-96 md:h-150 w-full object-cover"
             />
           </div>
@@ -168,6 +171,7 @@ const Services = () => {
             <img
               src={playground}
               alt="Детский клуб"
+              loading="lazy"
               className="rounded-2xl shadow-lg h-64 sm:h-80 md:h-120 w-full object-cover"
             />
           </div>

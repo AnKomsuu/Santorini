@@ -49,7 +49,7 @@ const Footer = () => {
     >
       <div className="pt-8 md:pt-15 pb-4 md:pb-7 px-4 md:pl-30 md:pr-15">
         <div className="flex flex-col md:flex-row items-start mb-8 md:mb-13 gap-8 md:gap-0">
-          <img className="theme-logo w-32 md:w-auto" src={santorini} alt="" />
+          <img className="theme-logo w-32 md:w-auto" src={santorini} alt="Santorini Hotel" />
           <div className="md:w-90 md:ml-21">
             <p className="flex text-theme-blue items-center mb-2 gap-x-2">
               <FaPhoneAlt />
@@ -84,21 +84,21 @@ const Footer = () => {
               target="_blank"
               rel="noreferrer"
             >
-              <img className="w-8 md:w-10" src={vk} alt="" />
+              <img className="w-8 md:w-10" src={vk} alt="VK" />
             </a>
             <a
               href="https://youtu.be/j-iheFkstFQ"
               target="_blank"
               rel="noreferrer"
             >
-              <img className="w-8 md:w-10" src={youtube} alt="" />
+              <img className="w-8 md:w-10" src={youtube} alt="YouTube" />
             </a>
             <a
               href="https://dzen.ru/video/watch/686676736777d3671a5c2813?sid=544742401204260607"
               target="_blank"
               rel="noreferrer"
             >
-              <img className="w-8 md:w-10" src={zen} alt="" />
+              <img className="w-8 md:w-10" src={zen} alt="Дзен" />
             </a>
           </div>
           <a

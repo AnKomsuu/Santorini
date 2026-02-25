@@ -48,7 +48,7 @@ const AboutRoom = ({ room }) => {
         <img
           className="absolute w-full h-full rounded-b-2xl object-cover"
           src={room.image}
-          alt=""
+          alt={`Номер ${room.category}`}
         />
         <p
           className="absolute text-2xl md:text-5xl uppercase

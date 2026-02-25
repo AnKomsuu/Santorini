@@ -80,7 +80,7 @@ const PhotoCard = ({ src, title, colSpan, rowSpan, height }) => {
     <div
       className={`relative rounded-xl md:rounded-2xl overflow-hidden ${colSpan} ${rowSpan}`}
     >
-      <img src={src} alt={title} className={`object-cover w-full ${height}`} />
+      <img src={src} alt={title} loading="lazy" className={`object-cover w-full ${height}`} />
       <p
         className={`absolute bottom-2 md:bottom-4 left-2 md:left-4 text-white font-bold text-sm md:text-xl ${
           height?.includes("h-80") ? "md:text-xl" : "md:text-3xl"
