@@ -1,6 +1,6 @@
 import santorini from "../../assets/santorini.svg";
 import { FaPhoneAlt } from "react-icons/fa";
-import vk from "../../assets/vk.svg";
+import vk from "../../assets/VK.svg";
 import youtube from "../../assets/YouTube.svg";
 import zen from "../../assets/zen.svg";
 import { Link } from "react-router-dom";
